@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lecteur vocal : confidentialité</title>
+<meta name="description" content="Politique de confidentialité de l'extension Lecteur vocal (Chrome, Edge). Privacy policy of the Lecteur vocal browser extension.">
+<meta name="author" content="Maako Ravelle WOUROUGOU">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400..700&display=swap">
+<style>
+:root {
+  --paper: #eef3f2; --paper-2: #e2eae8; --ink: #0b1d1d; --ink-2: #435958; --line: #c6d5d3; --accent: #058a8a; --accent-ink: #036b6b;
+  --f-display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
+  --f-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --paper: #081414; --paper-2: #0e1e1e; --ink: #e2eeec; --ink-2: #9db4b1; --line: #213736; --accent: #2fb3ad; --accent-ink: #5ccfc8; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --paper: #081414; --paper-2: #0e1e1e; --ink: #e2eeec; --ink-2: #9db4b1; --line: #213736; --accent: #2fb3ad; --accent-ink: #5ccfc8; color-scheme: dark; }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 1.0625rem/1.65 var(--f-body); -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 760px; margin: 0 auto; padding: clamp(28px, 6vw, 72px) 16px 72px; }
+.top { display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: .875rem; }
+a { color: var(--accent-ink); text-underline-offset: 3px; }
+.top a { color: var(--ink-2); text-decoration: none; }
+.top a:hover { color: var(--ink); }
+.langs { display: flex; gap: 14px; }
+h1 { font-family: var(--f-display); font-weight: 750; font-size: clamp(2.2rem, 1.4rem + 4vw, 3.6rem); letter-spacing: -0.035em; line-height: 1; margin: clamp(36px, 7vw, 72px) 0 14px; }
+h1 span { color: var(--accent); }
+.meta { color: var(--ink-2); font-size: .9375rem; margin: 0 0 8px; }
+section { border-top: 1px solid var(--line); margin-top: 40px; padding-top: 28px; }
+h2 { font-family: var(--f-display); font-size: 1.5rem; letter-spacing: -0.02em; margin: 0 0 6px; }
+.short { font-weight: 600; margin: 14px 0 18px; }
+ul { padding: 0; margin: 0; list-style: none; display: grid; gap: 14px; }
+li { padding-left: 18px; position: relative; }
+li::before { content: ""; position: absolute; left: 0; top: .72em; width: 7px; height: 1px; background: var(--accent); }
+b { font-weight: 600; }
+code { font-size: .9em; background: var(--paper-2); padding: 1px 5px; border-radius: 4px; }
+.foot { margin-top: 48px; color: var(--ink-2); font-size: .875rem; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <nav class="top" aria-label="Navigation">
+    <a href="../index.html#voice">← Portfolio</a>
+    <span class="langs"><a href="#fr" hreflang="fr">Français</a><a href="#en" hreflang="en">English</a></span>
+  </nav>
+
+  <h1>Lecteur vocal<span>.</span></h1>
+  <p class="meta">Extension Chrome et Edge · éditeur : Maako Ravelle WOUROUGOU · mise à jour : 20 novembre 2026</p>
+
+  <section id="fr" lang="fr">
+    <h2>Politique de confidentialité</h2>
+    <p class="short">En bref : l'extension ne collecte, ne stocke sur un serveur, ne vend ni ne partage aucune donnée.</p>
+    <ul>
+      <li><b>Texte lu.</b> Le texte des pages et des PDF est extrait et transformé en voix sur votre ordinateur. Avec les voix neuronales Piper, aucun texte ne quitte l'ordinateur.</li>
+      <li><b>Voix du navigateur.</b> Si vous choisissez une voix en ligne fournie par le navigateur (voix Google dans Chrome, voix « Natural » dans Edge), le navigateur envoie le texte lu à son fournisseur, comme pour toute synthèse vocale en ligne. L'extension n'a pas accès à ces échanges.</li>
+      <li><b>Téléchargement de voix.</b> La voix anglaise et les voix supplémentaires sont téléchargées une seule fois depuis Hugging Face (huggingface.co), à leur premier usage. Cette requête ne contient aucun texte ; comme toute requête web, elle révèle votre adresse IP à Hugging Face.</li>
+      <li><b>PDF d'autres sites.</b> Pour lire un PDF hébergé ailleurs, l'extension le télécharge depuis son adresse d'origine, après votre accord explicite pour ce site.</li>
+      <li><b>Réglages.</b> Vitesse, volume, voix choisies, thème et taille du texte sont enregistrés par le navigateur (<code>chrome.storage.sync</code>) et suivent votre compte de navigateur s'il est synchronisé. Ils ne sont envoyés à personne d'autre.</li>
+      <li><b>Ni compte, ni statistiques, ni publicité, ni suivi.</b></li>
+      <li><b>Accès aux pages.</b> L'extension ne s'active que sur l'onglet où vous la déclenchez (bouton, raccourci ou clic droit).</li>
+    </ul>
+    <p class="foot">Contact : <a href="mailto:ravellewourougou@gmail.com">ravellewourougou@gmail.com</a></p>
+  </section>
+
+  <section id="en" lang="en">
+    <h2>Privacy policy</h2>
+    <p class="short">In short: the extension does not collect, store on a server, sell or share any data.</p>
+    <ul>
+      <li><b>Text being read.</b> Page and PDF text is extracted and turned into speech on your computer. With the Piper neural voices, no text leaves your computer.</li>
+      <li><b>Browser voices.</b> If you choose an online voice provided by the browser (Google voices in Chrome, "Natural" voices in Edge), the browser sends the text to its provider, as with any online speech synthesis. The extension has no access to that exchange.</li>
+      <li><b>Voice downloads.</b> The English voice and additional voices are downloaded once from Hugging Face (huggingface.co), on first use. The request contains no text; like any web request, it reveals your IP address to Hugging Face.</li>
+      <li><b>PDFs from other sites.</b> To read a PDF hosted elsewhere, the extension downloads it from its original address, after your explicit permission for that site.</li>
+      <li><b>Settings.</b> Speed, volume, chosen voices, theme and text size are saved by the browser (<code>chrome.storage.sync</code>) and follow your browser account if sync is on. They are sent to no one else.</li>
+      <li><b>No account, no analytics, no ads, no tracking.</b></li>
+      <li><b>Page access.</b> The extension only runs on the tab where you start it (button, shortcut or right-click).</li>
+    </ul>
+    <p class="foot">Contact: <a href="mailto:ravellewourougou@gmail.com">ravellewourougou@gmail.com</a></p>
+  </section>
+</main>
+</body>
+</html>

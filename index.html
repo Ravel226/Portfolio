@@ -1,0 +1,1838 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Maako Ravelle WOUROUGOU</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Maako Ravelle WOUROUGOU, AI engineer. Speech and translation for languages with little data, agent systems, AI for cybersecurity.">
+<meta name="author" content="Maako Ravelle WOUROUGOU">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Instrument+Sans:wght@400..700&display=swap">
+<script>
+(function () {
+  var l = "";
+  try { l = localStorage.getItem("mrw-lang") || ""; } catch (e) {}
+  if (l !== "en" && l !== "fr") { l = (navigator.language || "en").toLowerCase().indexOf("fr") === 0 ? "fr" : "en"; }
+  document.documentElement.setAttribute("data-lang", l);
+  document.documentElement.lang = l;
+  /* Motion follows the system setting (prefers-reduced-motion) unless the visitor chose otherwise with the
+     Animations switch: "on" forces motion, "off" removes it. Every motion check on the page asks __motionOK. */
+  var R = document.documentElement, m = "";
+  try { m = localStorage.getItem("mrw-motion") || ""; } catch (e) {}
+  if (m === "on") R.classList.add("force-motion"); else if (m === "off") R.classList.add("no-motion");
+  window.__motionOK = function () {
+    return R.classList.contains("force-motion") || (!R.classList.contains("no-motion") && !window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  };
+  try {
+    if (window.__motionOK() && !sessionStorage.getItem("mrw-intro")) R.classList.add("intro-on");
+  } catch (e) { /* storage blocked: no intro */ }
+})();
+</script>
+<style>
+/* Layout: an editorial 12-column page. The hero sets the name at poster scale over a live speech waveform;
+   work reads as case files beside a sticky index; research reads as lab notes. Light mineral paper, dark ink, one teal. */
+:root {
+  --paper: #eef3f2;
+  --paper-2: #e2eae8;
+  --ink: #0b1d1d;
+  --ink-2: #435958;
+  --line: #c6d5d3;
+  --accent: #058a8a;
+  --accent-ink: #036b6b;
+  --on-accent: #ffffff;
+  --term: #071818;
+  --term-2: #0f2626;
+  --term-fg: #d3e6e3;
+  --term-dim: #7f9c99;
+  --term-acc: #3cc7c0;
+  --term-ok: #86d9ab;
+  --term-warn: #f0a35e;
+  --bad: #c2412d;
+  --f-display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
+  --f-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, Consolas, monospace;
+  --t-xs: 0.75rem;
+  --t-s: 0.875rem;
+  --t-m: 1.0625rem;
+  --t-l: clamp(1.2rem, 1.1rem + 0.6vw, 1.5rem);
+  --t-xl: clamp(2.3rem, 1.4rem + 4.2vw, 5rem);
+  --t-xxl: clamp(3.1rem, 0.6rem + 11.6vw, 11.5rem);
+  --ease: cubic-bezier(.2, .7, .1, 1);
+  --head-h: 64px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #081414; --paper-2: #0e1e1e; --ink: #e2eeec; --ink-2: #9db4b1; --line: #213736;
+    --accent: #2fb3ad; --accent-ink: #5ccfc8; --on-accent: #041010; --bad: #f08a76;
+    --term: #030d0d; --term-2: #0a1c1c;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #081414; --paper-2: #0e1e1e; --ink: #e2eeec; --ink-2: #9db4b1; --line: #213736;
+  --accent: #2fb3ad; --accent-ink: #5ccfc8; --on-accent: #041010; --bad: #f08a76;
+  --term: #030d0d; --term-2: #0a1c1c;
+  color-scheme: dark;
+}
+
+[data-lang="fr"] [data-l="en"] { display: none !important; }
+:root:not([data-lang="fr"]) [data-l="fr"] { display: none !important; }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: var(--t-m);
+  line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  overflow-x: clip;
+  text-rendering: optimizeLegibility;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 30; background: var(--paper);
+}
+a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+a:hover { color: var(--accent-ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 700; line-height: 1; margin: 0; text-wrap: balance; letter-spacing: -0.02em; }
+p { margin: 0; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+img { max-width: 100%; height: auto; display: block; }
+.wrap { max-width: 1360px; margin-inline: auto; padding-inline: clamp(0px, 3vw - 8px, 40px); }
+.mono { font-family: var(--f-mono); }
+.label {
+  font-family: var(--f-mono); font-size: var(--t-xs); letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--ink-2);
+}
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+section[id] { scroll-margin-top: calc(var(--head-h) + 16px); }
+
+/* Header */
+.head {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: var(--paper); border-bottom: 1px solid transparent;
+  transition: border-color .3s;
+}
+.head.scrolled { border-bottom-color: var(--line); }
+.head .wrap { height: var(--head-h); display: flex; align-items: center; gap: 24px; }
+.mark { font-family: var(--f-display); font-weight: 800; font-size: 1.05rem; letter-spacing: -0.02em; text-decoration: none; display: flex; align-items: baseline; gap: 2px; }
+.mark i { font-style: normal; color: var(--accent); }
+.nav { display: flex; gap: 22px; margin-left: auto; }
+.nav a { text-decoration: none; font-size: var(--t-s); color: var(--ink-2); }
+.nav a:hover { color: var(--ink); }
+.lang { display: flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.lang button {
+  font: 600 var(--t-xs)/1 var(--f-mono); letter-spacing: 0.06em; padding: 8px 10px; border: 0;
+  background: transparent; color: var(--ink-2); cursor: pointer;
+}
+.lang button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.motion-tg { display: inline-flex; align-items: center; gap: 8px; margin-left: 10px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 6px; background: none; color: var(--ink-2); font: 600 var(--t-xs)/1 var(--f-body); cursor: pointer; }
+.motion-tg:hover { color: var(--ink); }
+.motion-tg i { position: relative; width: 26px; height: 14px; border-radius: 99px; background: var(--line); transition: background .2s; }
+.motion-tg i::after { content: ""; position: absolute; top: 2px; left: 2px; width: 10px; height: 10px; border-radius: 50%; background: var(--paper); transition: transform .2s; }
+.motion-tg[aria-pressed="true"] i { background: var(--accent); }
+.motion-tg[aria-pressed="true"] i::after { transform: translateX(12px); }
+@media (max-width: 560px) { .motion-tg .mt-l { display: none; } }
+@media (max-width: 720px) { .nav { display: none; } .lang { margin-left: auto; } }
+
+/* Hero */
+.hero { padding-block: clamp(28px, 5vw, 64px) 0; }
+.hero-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 24px; }
+.greet { font-family: var(--f-mono); font-size: var(--t-s); display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; color: var(--ink-2); }
+.greet b { font-weight: 600; color: var(--ink); }
+.greet .code { font-size: var(--t-xs); border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px; }
+.greet .caret { display: inline-block; width: 0.55em; height: 1.05em; background: var(--accent); vertical-align: -0.15em; margin-left: 2px; animation: blink 1.1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.status { display: inline-flex; align-items: center; gap: 10px; font-size: var(--t-s); }
+.status::before {
+  content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent); animation: ping 2.4s var(--ease) infinite;
+}
+@keyframes ping { 70% { box-shadow: 0 0 0 9px color-mix(in srgb, var(--accent) 0%, transparent); } 100% { box-shadow: 0 0 0 0 transparent; } }
+
+.name { margin-top: clamp(20px, 4vw, 44px); font-size: var(--t-xxl); line-height: 0.86; letter-spacing: -0.045em; container-type: inline-size; }
+.name .l1 { display: block; font-weight: 300; font-variation-settings: "opsz" 96; font-size: min(11.5cqi, 9.5rem); }
+.name .l2 { display: block; font-weight: 800; color: var(--accent); font-variation-settings: "opsz" 96; font-size: min(15cqi, 11.5rem); white-space: nowrap; }
+.name .ch { display: inline-block; animation: rise 1s var(--ease) both; animation-delay: calc(var(--i) * 38ms + 80ms); }
+@keyframes rise { from { transform: translateY(0.55em) rotate(4deg); clip-path: inset(0 0 100% 0); } to { transform: none; clip-path: inset(0 0 -20% 0); } }
+
+.hero-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 28px 24px; margin-top: clamp(28px, 4vw, 48px); align-items: end; }
+.lede { grid-column: 1 / span 7; font-size: var(--t-l); line-height: 1.45; max-width: 36ch; text-wrap: pretty; }
+.facts-hero { grid-column: 9 / span 4; display: grid; gap: 10px; }
+.facts-hero li { display: flex; justify-content: space-between; gap: 16px; border-top: 1px solid var(--line); padding-top: 10px; font-size: var(--t-s); }
+.facts-hero li span:first-child { color: var(--ink-2); }
+.facts-hero li span:last-child { text-align: right; }
+.cta { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px; padding: 13px 18px; border-radius: 6px;
+  font: 600 var(--t-s)/1 var(--f-body); text-decoration: none; border: 1px solid var(--ink);
+  transition: transform .25s var(--ease), background .25s, color .25s;
+}
+.btn.solid { background: var(--accent-ink); border-color: var(--accent-ink); color: var(--on-accent); }
+.btn.solid:hover { color: var(--on-accent); transform: translateY(-2px); }
+.btn.ghost:hover { background: var(--ink); color: var(--paper); }
+.btn svg { width: 14px; height: 14px; }
+@media (max-width: 900px) {
+  .lede, .facts-hero { grid-column: 1 / -1; }
+}
+
+.wave-band { position: relative; margin-top: clamp(28px, 4vw, 44px); margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); }
+#wave { display: block; width: 100%; height: clamp(120px, 18vw, 230px); }
+.wave-band .label { position: absolute; left: max(16px, env(safe-area-inset-left, 0px)); bottom: 8px; }
+@media (hover: none) { .wave-band .label { display: none; } }
+
+/* Ticker */
+.ticker { border-block: 1px solid var(--line); overflow: hidden; margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); }
+.ticker-track { display: flex; width: max-content; animation: tick 60s linear infinite; }
+.ticker:hover .ticker-track { animation-play-state: paused; }
+.ticker ul { display: flex; }
+.ticker li { display: flex; align-items: baseline; gap: 12px; padding: 16px 36px; white-space: nowrap; border-right: 1px solid var(--line); }
+.ticker li b { font-family: var(--f-display); font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; }
+.ticker li span { font-family: var(--f-mono); font-size: var(--t-xs); color: var(--ink-2); letter-spacing: 0.04em; }
+@keyframes tick { to { transform: translateX(-50%); } }
+
+/* Section head */
+.sec { padding-block: clamp(72px, 10vw, 140px) 0; }
+.sec-head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px 24px; align-items: end; margin-bottom: clamp(32px, 5vw, 64px); }
+.sec-head h2 { grid-column: 1 / span 7; font-size: var(--t-xl); letter-spacing: -0.035em; }
+.sec-head p { grid-column: 9 / span 4; color: var(--ink-2); max-width: 40ch; }
+@media (max-width: 900px) { .sec-head h2, .sec-head p { grid-column: 1 / -1; } }
+
+/* Work */
+.work { display: grid; grid-template-columns: minmax(170px, 2.6fr) minmax(0, 9.4fr); gap: 40px; }
+.idx { position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--head-h) + 24px); align-self: start; display: grid; gap: 2px; }
+.idx a {
+  display: grid; grid-template-columns: 2.2em 1fr; align-items: baseline; padding: 8px 0; text-decoration: none;
+  color: var(--ink-2); border-top: 1px solid var(--line); font-size: var(--t-s); transition: color .2s, padding .3s var(--ease);
+}
+.idx a span:first-child { font-family: var(--f-mono); font-size: var(--t-xs); }
+.idx a[aria-current="true"] { color: var(--ink); padding-left: 6px; }
+.idx a[aria-current="true"] span:first-child { color: var(--accent-ink); }
+@media (max-width: 900px) {
+  .work { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .idx { position: static; display: flex; overflow-x: auto; gap: 8px; padding-bottom: 8px; scrollbar-width: none; }
+  .idx a { border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; white-space: nowrap; display: inline-flex; gap: 8px; }
+  .idx a span:first-child { display: none; }
+}
+
+.case { border-top: 1px solid var(--ink); padding-block: clamp(28px, 4vw, 44px) clamp(64px, 8vw, 110px); scroll-margin-top: calc(var(--head-h) + 16px); min-width: 0; }
+.case-head { display: grid; gap: 14px; }
+.case h3 { font-size: var(--t-xl); letter-spacing: -0.035em; }
+.case .lede-2 { font-size: var(--t-l); line-height: 1.45; max-width: 46ch; text-wrap: pretty; }
+.case-body { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 32px 48px; margin-top: 36px; align-items: start; }
+.case-body > * { min-width: 0; }
+@media (max-width: 1100px) { .case-body { grid-template-columns: minmax(0, 1fr); } }
+.points { display: grid; gap: 12px; }
+.points li { display: grid; grid-template-columns: 22px 1fr; gap: 8px; font-size: var(--t-m); }
+.points li::before { content: "+"; font-family: var(--f-mono); color: var(--accent-ink); font-weight: 700; }
+.note { margin-top: 20px; font-size: var(--t-s); color: var(--ink-2); display: flex; gap: 8px; align-items: center; }
+.note svg { width: 14px; height: 14px; flex: none; }
+.links { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: var(--t-s); }
+.links a { font-family: var(--f-mono); font-size: var(--t-xs); letter-spacing: 0.02em; display: inline-flex; gap: 6px; align-items: center; }
+
+/* Terminal */
+.term { background: var(--term); color: var(--term-fg); border-radius: 12px; overflow: hidden; font-family: var(--f-mono); font-size: 12.5px; line-height: 1.6; }
+.term-bar { display: flex; align-items: center; gap: 12px; justify-content: space-between; padding: 10px 14px; background: var(--term-2); color: var(--term-dim); font-size: 11px; letter-spacing: 0.05em; }
+.term-bar button { font: inherit; color: var(--term-fg); background: transparent; border: 1px solid #ffffff2b; border-radius: 4px; padding: 4px 9px; cursor: pointer; }
+.term-bar button:hover { border-color: var(--term-acc); color: var(--term-acc); }
+.term-body { padding: 16px 18px 20px; overflow-x: auto; }
+.term-body pre { margin: 0; font: inherit; white-space: pre; }
+.tl { display: block; min-height: 1.6em; }
+.tl.off { visibility: hidden; }
+.t-dim { color: var(--term-dim); }
+.t-acc { color: var(--term-acc); }
+.t-ok { color: var(--term-ok); }
+.t-b { color: #ffffff; font-weight: 700; }
+.rd { display: inline-block; background: var(--term-fg); opacity: 0.85; height: 0.95em; vertical-align: -0.1em; border-radius: 1px; width: var(--w, 8ch); }
+.box { color: var(--term-dim); }
+.t-fg { color: var(--term-fg); }
+
+/* Telegram pair */
+.duo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 28px; max-width: 620px; }
+.duo figure { margin: 0; display: grid; gap: 10px; }
+.phone { border-radius: 18px; overflow: hidden; border: 1px solid var(--line); background: #17212b; aspect-ratio: 540 / 1104; }
+.phone img { width: 100%; height: 100%; object-fit: cover; }
+.duo figcaption { font-size: var(--t-s); color: var(--ink-2); }
+.duo figcaption b { font-family: var(--f-mono); font-weight: 600; color: var(--ink); margin-right: 6px; }
+.sub-h { font-family: var(--f-display); font-size: 1.45rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; margin-top: 44px; max-width: 30ch; }
+
+/* Layer stack */
+.stack { margin-top: 18px; border-top: 1px solid var(--line); }
+.stack li { display: grid; grid-template-columns: minmax(130px, 2fr) minmax(0, 5fr); gap: 16px; padding: 11px 4px; border-bottom: 1px solid var(--line); transition: background .25s, padding .3s var(--ease); }
+.stack li:hover { background: var(--paper-2); padding-left: 12px; }
+.stack code { font-family: var(--f-mono); font-size: var(--t-xs); color: var(--accent-ink); letter-spacing: 0.02em; padding-top: 3px; }
+.stack span { font-size: var(--t-s); }
+.stack-cap { font-size: var(--t-s); color: var(--ink-2); margin-top: 8px; }
+@media (max-width: 560px) { .stack li { grid-template-columns: minmax(0, 1fr); gap: 2px; } .duo { gap: 12px; } }
+
+/* Speech flow */
+.flow { border: 1px solid var(--line); border-radius: 12px; padding: 22px; display: grid; gap: 22px; background: var(--paper-2); }
+.flow-rows { display: grid; gap: 14px; }
+.flow-row { display: grid; grid-template-columns: 84px minmax(14px, 1fr) auto minmax(14px, 1fr) 84px; align-items: center; gap: 8px; }
+.node { display: grid; gap: 6px; justify-items: center; }
+.node .label { font-size: 10.5px; }
+.bars { display: flex; align-items: center; gap: 3px; height: 40px; }
+.bars i { width: 4px; border-radius: 2px; background: var(--accent); height: 30%; animation: talk 1.2s ease-in-out infinite; animation-delay: calc(var(--d) * -0.13s); }
+@keyframes talk { 0%, 100% { height: 18%; } 50% { height: 95%; } }
+.txt { display: grid; gap: 5px; width: 70px; }
+.txt i { height: 6px; border-radius: 3px; background: var(--ink); opacity: 0.75; }
+.txt i:nth-child(2) { width: 80%; } .txt i:nth-child(3) { width: 55%; }
+.arrow { height: 1px; background: var(--ink-2); position: relative; }
+.arrow::after { content: ""; position: absolute; right: -1px; top: -3px; border: 3.5px solid transparent; border-left: 6px solid var(--ink-2); border-right: 0; }
+.step { font-family: var(--f-mono); font-size: var(--t-xs); padding: 4px 8px; border: 1px solid var(--ink); border-radius: 4px; background: var(--paper); }
+.latency { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 18px; }
+.latency b { font-family: var(--f-display); font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1; color: var(--accent-ink); }
+
+/* Pipeline svg */
+.pipe { border: 1px solid var(--line); border-radius: 12px; background: var(--paper-2); padding: 14px; overflow-x: auto; }
+.pipe svg { display: block; width: 100%; height: auto; }
+.pipe .pipe-v { display: none; max-width: 340px; margin-inline: auto; }
+@media (max-width: 600px) { .pipe .pipe-h { display: none; } .pipe .pipe-v { display: block; } }
+.pipe .ln { stroke: var(--ink-2); stroke-width: 1; fill: none; }
+.pipe .nd { fill: var(--paper); stroke: var(--ink); stroke-width: 1; }
+.pipe .nd.hot { fill: var(--accent-ink); stroke: var(--accent-ink); }
+.pipe text { font-family: var(--f-mono); font-size: 11px; fill: var(--ink); }
+.pipe text.on { fill: var(--on-accent); font-weight: 600; }
+.pipe .dot { fill: var(--accent); }
+
+/* Small terminal + figures */
+.figure { margin: 0; display: grid; gap: 10px; }
+.figure img { border-radius: 10px; border: 1px solid var(--line); background: #0e1117; }
+.figure figcaption { font-size: var(--t-s); color: var(--ink-2); }
+.eye-card { border: 1px solid var(--line); border-radius: 12px; background: var(--paper-2); padding: 26px; display: grid; justify-items: center; gap: 14px; }
+.eye-card svg { width: min(100%, 360px); height: auto; }
+.eye-card .lid { transform-origin: 50% 30%; animation: drowse 6s var(--ease) infinite; fill: var(--paper-2); }
+@keyframes drowse { 0%, 30% { transform: scaleY(0.05); } 55%, 80% { transform: scaleY(1); } 90%, 100% { transform: scaleY(0.05); } }
+.eye-card .iris { fill: var(--ink); }
+.eye-card .outline { fill: none; stroke: var(--ink); stroke-width: 2; }
+.eye-card .det { fill: none; stroke: var(--accent); stroke-width: 2; }
+.eye-card .tag { fill: var(--accent); }
+.eye-card .tagt { font-family: var(--f-mono); font-size: 13px; fill: var(--on-accent); font-weight: 600; }
+.eye-card .s-awake { animation: s1 6s steps(1) infinite; }
+.eye-card .s-drowsy { animation: s2 6s steps(1) infinite; }
+@keyframes s1 { 0% { opacity: 1; } 45% { opacity: 0; } 92% { opacity: 1; } }
+@keyframes s2 { 0% { opacity: 0; } 45% { opacity: 1; } 92% { opacity: 0; } }
+
+/* Research */
+.lab { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+@media (max-width: 960px) { .lab { grid-template-columns: minmax(0, 1fr); } }
+.paper { border-top: 1px solid var(--ink); padding-top: 22px; display: grid; gap: 16px; align-content: start; min-width: 0; }
+.chip { justify-self: start; font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.05em; padding: 5px 9px; border-radius: 4px; border: 1px solid var(--accent-ink); color: var(--accent-ink); text-transform: uppercase; }
+.chip.wip { border-style: dashed; }
+.paper h3 { font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem); letter-spacing: -0.03em; line-height: 1.05; }
+.paper p { max-width: 58ch; }
+.chart { border: 1px solid var(--line); border-radius: 12px; padding: 16px; background: var(--paper-2); overflow-x: auto; }
+.chart svg { display: block; width: 100%; min-width: 300px; height: auto; }
+.chart text { font-family: var(--f-mono); font-size: 12px; fill: var(--ink-2); }
+.chart text.v { fill: var(--ink); font-weight: 600; font-size: 13px; }
+.chart .grid { stroke: var(--line); stroke-width: 1; }
+.chart .b1 { fill: var(--ink-2); }
+.chart .b2 { fill: var(--accent); }
+.chart-cap { font-size: var(--t-s); color: var(--ink-2); }
+.adapters { border: 1px solid var(--line); border-radius: 12px; padding: 18px; background: var(--paper-2); display: grid; gap: 14px; }
+.cells { display: grid; grid-template-columns: repeat(15, minmax(0, 1fr)); gap: 5px; }
+.cells i { aspect-ratio: 1; border-radius: 2px; border: 1px solid var(--accent); animation: train 9s steps(1) infinite; animation-delay: calc(var(--i) * 0.12s); }
+@keyframes train { 0% { background: transparent; } 8%, 88% { background: var(--accent); } 100% { background: transparent; } }
+.share { display: flex; justify-content: space-between; font-family: var(--f-mono); font-size: 11px; color: var(--ink-2); border-top: 1px solid var(--line); padding-top: 10px; }
+.share-bar { height: 8px; border-radius: 4px; background: linear-gradient(90deg, var(--paper), var(--accent)); border: 1px solid var(--line); }
+.teach { margin-top: 40px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.teach div { border-top: 1px solid var(--line); padding-top: 14px; display: grid; gap: 6px; }
+@media (max-width: 760px) { .teach { grid-template-columns: minmax(0, 1fr); } }
+
+/* Path */
+.path li { display: grid; grid-template-columns: minmax(150px, 3fr) minmax(0, 6fr) minmax(0, 3fr); gap: 8px 24px; padding-block: 20px; border-top: 1px solid var(--line); align-items: baseline; transition: padding .3s var(--ease); }
+.path li:last-child { border-bottom: 1px solid var(--line); }
+.path li:hover { padding-left: 10px; }
+.path .when { font-family: var(--f-mono); font-size: var(--t-s); color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.path .what { font-family: var(--f-display); font-size: clamp(1.15rem, 1rem + 0.7vw, 1.6rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
+.path .where { color: var(--ink-2); font-size: var(--t-s); }
+.path li.now .when { color: var(--accent-ink); }
+@media (max-width: 760px) { .path li { grid-template-columns: minmax(0, 1fr); } }
+.off { margin-top: 48px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.off div { display: grid; gap: 6px; }
+@media (max-width: 760px) { .off { grid-template-columns: minmax(0, 1fr); } }
+
+/* Contact */
+.contact { padding-block: clamp(80px, 11vw, 150px) 40px; }
+.ask { font-family: var(--f-display); font-size: clamp(2rem, 1rem + 4.4vw, 4.6rem); font-weight: 600; letter-spacing: -0.035em; line-height: 1.02; max-width: 20ch; text-wrap: balance; }
+.ask em { font-style: normal; color: var(--accent); }
+.mail { margin-top: 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; border-block: 1px solid var(--ink); padding-block: 22px; }
+.mail-addr { font-family: var(--f-display); font-size: clamp(1.3rem, 0.9rem + 2.2vw, 2.6rem); font-weight: 700; letter-spacing: -0.03em; text-decoration: none; overflow-wrap: anywhere; min-width: 0; }
+.copy { margin-left: auto; font: 600 var(--t-xs)/1 var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; padding: 10px 14px; border-radius: 6px; border: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; }
+.copy:hover { background: var(--ink); color: var(--paper); }
+.copy .done { display: none; }
+.copy.ok .done { display: inline; }
+.copy.ok .todo { display: none; }
+.elsewhere { margin-top: 28px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.elsewhere a, .elsewhere div { display: grid; gap: 4px; text-decoration: none; border-top: 1px solid var(--line); padding-top: 12px; min-width: 0; }
+.elsewhere b { font-weight: 600; font-size: var(--t-s); overflow-wrap: anywhere; }
+@media (max-width: 900px) { .elsewhere { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .elsewhere { grid-template-columns: minmax(0, 1fr); } }
+.foot { margin-top: 80px; padding-block: 20px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 10px 24px; justify-content: space-between; font-size: var(--t-xs); color: var(--ink-2); font-family: var(--f-mono); }
+.foot a { text-decoration: none; }
+.weave { height: 6px; margin-top: 18px; border-radius: 2px; background: repeating-linear-gradient(90deg, var(--accent) 0 14px, var(--ink) 14px 18px, var(--paper-2) 18px 30px, var(--accent-ink) 30px 34px, var(--line) 34px 46px); opacity: 0.7; }
+
+
+/* v2: progress, cursor, portrait */
+.progress { position: fixed; top: env(safe-area-inset-top, 0px); left: 0; right: 0; height: 2px; z-index: 41; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); pointer-events: none; }
+@supports (animation-timeline: scroll()) { .progress { animation: grow linear both; animation-timeline: scroll(root); } @keyframes grow { to { transform: scaleX(1); } } }
+.cursor { position: fixed; left: 0; top: 0; width: 30px; height: 30px; margin: -15px 0 0 -15px; border: 1px solid var(--accent); border-radius: 50%; pointer-events: none; z-index: 60; opacity: 0; transition: width .35s var(--ease), height .35s var(--ease), margin .35s var(--ease), background .35s, opacity .3s; }
+.cursor.on { opacity: 1; }
+.cursor.hov { width: 66px; height: 66px; margin: -33px 0 0 -33px; background: color-mix(in srgb, var(--accent) 14%, transparent); }
+@media (pointer: coarse) { .cursor { display: none; } }
+.hero-grid .lede { grid-column: 1 / span 7; grid-row: 1; }
+.hero-grid .facts-hero { grid-column: 1 / span 6; grid-row: 2; }
+.hero-grid .cta { grid-column: 1 / span 7; grid-row: 3; }
+.portrait { grid-column: 9 / span 4; grid-row: 1 / span 3; align-self: end; margin: 0; display: grid; gap: 10px; }
+.portrait .frame { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 3px; background: var(--paper-2); animation: unveil 1.3s var(--ease) .35s both; }
+.portrait img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.06); transform: scale(1.04); animation: settle 1.8s var(--ease) .35s both; transition: filter .7s var(--ease); }
+.portrait .frame::after { content: ""; position: absolute; inset: 0; background: var(--accent); mix-blend-mode: color; opacity: .6; transition: opacity .7s var(--ease); pointer-events: none; }
+.portrait:hover img { filter: none; }
+.portrait:hover .frame::after { opacity: 0; }
+.portrait figcaption { display: flex; justify-content: space-between; gap: 12px; }
+@keyframes unveil { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes settle { from { transform: scale(1.3); } to { transform: scale(1.04); } }
+@media (max-width: 900px) {
+  .hero-grid .lede, .hero-grid .facts-hero, .hero-grid .cta { grid-column: 1 / -1; grid-row: auto; }
+  .portrait { grid-column: 1 / -1; grid-row: auto; max-width: 320px; order: -1; }
+}
+
+/* v2: reveal on arrival (only for blocks below the fold at load) */
+.sec-head h2 { transition: transform 1.1s var(--ease), opacity 1.1s var(--ease); }
+.sec-head.arm:not(.in) h2 { transform: translateY(45%) skewY(4deg); opacity: 0; }
+.chart rect.b1, .chart rect.b2 { transform-box: fill-box; transform-origin: 0 50%; transition: transform 1.4s var(--ease) .2s; }
+.chart.arm:not(.in) rect.b1, .chart.arm:not(.in) rect.b2 { transform: scaleX(0); }
+.case h3 { transition: letter-spacing .5s var(--ease); }
+.case:hover h3 { letter-spacing: -0.025em; }
+
+/* v2: voice reader */
+.reader { border: 1px solid var(--line); border-radius: 12px; background: var(--paper-2); padding: 22px 22px 16px; display: grid; gap: 18px; }
+.reader-text { font-size: 1.05rem; line-height: 1.8; max-width: 52ch; }
+.reader .s { border-radius: 3px; transition: background .35s; padding: 2px 0; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.reader .s.on { background: color-mix(in srgb, var(--accent) 17%, transparent); }
+.reader .w { border-radius: 3px; transition: background .15s, color .15s; }
+.reader .w.on { background: var(--accent-ink); color: var(--on-accent); }
+.reader .cite { opacity: .45; text-decoration: line-through; }
+.player { display: flex; align-items: center; gap: 10px; border-top: 1px solid var(--line); padding-top: 12px; font-family: var(--f-mono); font-size: var(--t-xs); color: var(--ink-2); }
+.player i { width: 28px; height: 28px; flex: none; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; color: var(--ink); }
+.player i.main { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.player svg { width: 11px; height: 11px; }
+.player .track { flex: 1; min-width: 40px; height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.player .track b { display: block; height: 100%; width: 30%; background: var(--accent); transition: width .3s linear; }
+
+/* v2: compliance report */
+.audit { border: 1px solid var(--line); border-radius: 12px; background: var(--paper-2); padding: 20px; display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 6fr); gap: 22px; align-items: start; }
+.page { aspect-ratio: 1 / 1.3; background: var(--paper); border: 1px solid var(--line); border-radius: 4px; padding: 12px; display: grid; gap: 7px; align-content: start; position: relative; overflow: hidden; }
+.page i { display: block; border-radius: 2px; }
+.page .band { height: 12px; background: var(--accent); }
+.page .ttl { height: 9px; width: 72%; background: var(--ink); margin-top: 6px; }
+.page .ln { height: 5px; background: var(--ink-2); opacity: .45; }
+.page .ln.s { width: 64%; }
+.page .bad { outline: 2px solid var(--bad); outline-offset: 2px; opacity: .9; width: 38%; }
+.page .img { height: 46px; background: color-mix(in srgb, var(--accent) 30%, var(--paper-2)); margin-top: 4px; }
+.page .scan { position: absolute; left: 0; right: 0; height: 32%; background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--accent) 26%, transparent)); border-bottom: 1px solid var(--accent); animation: scan 3.2s linear infinite; }
+@keyframes scan { from { top: -32%; } to { top: 100%; } }
+.checks { display: grid; gap: 10px; font-size: var(--t-s); }
+.checks li { display: grid; grid-template-columns: 20px 1fr; gap: 8px; align-items: baseline; animation: chk 9s steps(1) infinite; animation-delay: calc(var(--i) * .8s); }
+.checks li b { font-family: var(--f-mono); }
+.checks .ok b { color: var(--accent-ink); }
+.checks .ko b, .checks .ko span { color: var(--bad); }
+@keyframes chk { 0% { opacity: .2; } 6%, 92% { opacity: 1; } 100% { opacity: .2; } }
+@media (max-width: 560px) { .audit { grid-template-columns: minmax(0, 1fr); } .page { max-width: 220px; } }
+
+/* v2: OSINT globe */
+.globe { border-radius: 12px; background: var(--term); position: relative; overflow: hidden; }
+.globe canvas { display: block; width: 100%; aspect-ratio: 1 / 0.82; }
+.globe .legend { position: absolute; left: 14px; bottom: 12px; right: 14px; display: flex; flex-wrap: wrap; gap: 6px 16px; font-family: var(--f-mono); font-size: 11px; color: var(--term-dim); }
+.globe .legend span::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 6px; background: var(--c); }
+
+/* v2: invitation */
+.invite { border: 1px solid var(--line); border-radius: 12px; background: var(--paper-2); height: 320px; position: relative; overflow: hidden; display: grid; place-items: center; perspective: 900px; }
+.env { position: relative; width: 210px; height: 136px; margin-top: 90px; animation: float 4s ease-in-out infinite; }
+@keyframes float { 50% { transform: translateY(-8px) rotate(-1.5deg); } }
+.env .back { position: absolute; inset: 0; background: #7a1717; border-radius: 4px; }
+.env .card { position: absolute; left: 14px; right: 14px; top: 10px; height: 118px; background: #fffaf0; border-radius: 3px; box-shadow: 0 8px 22px rgba(0, 0, 0, .18); display: grid; place-content: center; gap: 6px; text-align: center; animation: card 6s var(--ease) infinite; z-index: 1; }
+.env .card b { font-family: var(--f-display); font-size: 1.15rem; color: #2D5A27; letter-spacing: -0.01em; }
+.env .card span { font-family: var(--f-mono); font-size: 10px; letter-spacing: .12em; color: #8B1A1A; }
+.env .card i { height: 2px; width: 60px; margin: 0 auto; background: #D4A84B; }
+.env .front { position: absolute; inset: 0; background: #8B1A1A; clip-path: polygon(0 0, 50% 52%, 100% 0, 100% 100%, 0 100%); border-radius: 0 0 4px 4px; z-index: 2; }
+.env .flap { position: absolute; left: 0; right: 0; top: 0; height: 58%; background: #a12424; clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: 50% 0; animation: flap 6s var(--ease) infinite; z-index: 3; }
+@keyframes flap { 0%, 12% { transform: rotateX(0); z-index: 3; } 26% { z-index: 0; } 30%, 80% { transform: rotateX(180deg); z-index: 0; } 94% { z-index: 3; } 96%, 100% { transform: rotateX(0); z-index: 3; } }
+@keyframes card { 0%, 28% { transform: translateY(0); } 46%, 76% { transform: translateY(-112px); } 94%, 100% { transform: translateY(0); } }
+.confetti i { position: absolute; top: -14px; left: var(--x); width: 6px; height: 10px; background: var(--c); border-radius: 1px; opacity: 0; animation: fall 6s linear infinite; animation-delay: var(--d); }
+@keyframes fall { 0%, 34% { transform: translateY(0) rotate(0); opacity: 0; } 38% { opacity: 1; } 82% { transform: translateY(340px) rotate(560deg); opacity: 1; } 100% { transform: translateY(350px) rotate(600deg); opacity: 0; } }
+
+/* v2: lab */
+.lab-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+.lab-grid article { border-top: 1px solid var(--ink); padding-top: 16px; display: grid; gap: 10px; align-content: start; transition: transform .45s var(--ease); }
+.lab-grid article:hover { transform: translateY(-6px); }
+.lab-grid h3 { font-size: 1.4rem; letter-spacing: -0.02em; line-height: 1.1; }
+.lab-grid p:not(.label) { font-size: var(--t-s); color: var(--ink-2); }
+@media (max-width: 1000px) { .lab-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .lab-grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* Scroll-driven entrances: transform only, so everything stays readable at rest */
+@supports (animation-timeline: view()) {
+  .rise { animation: up linear both; animation-timeline: view(); animation-range: entry 0% entry 35%; }
+  @keyframes up { from { transform: translateY(28px); } to { transform: none; } }
+}
+
+
+/* v3: the lab is a terminal room. Static design; the motion layer only opens the screen. */
+#lab { --paper: var(--term); --paper-2: var(--term-2); --ink: var(--term-fg); --ink-2: var(--term-dim); --line: #1e3a38;
+  --accent: var(--term-acc); --accent-ink: var(--term-acc); position: relative; isolation: isolate; color: var(--ink);
+  margin-block: clamp(56px, 8vw, 112px); padding-block: clamp(64px, 9vw, 128px); }
+#lab::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--term);
+  clip-path: inset(0 var(--lab-x, 0px) round var(--lab-r, 0px)); }
+
+/* v3: GSAP motion layer. html.gs is set only once GSAP runs, so without it every block stays visible. */
+.gs .rise { animation: none; }
+.gs .hero { overflow-x: clip; }
+.gs .sec-head h2 { transition: none; overflow: hidden; padding-bottom: .12em; margin-bottom: -.12em; }
+.gs .sec-head.arm:not(.in) h2 { transform: none; opacity: 1; }
+.h-in { display: block; }
+.gs .btn { transition: background .25s, color .25s; }
+.gs .btn.solid:hover { transform: none; }
+.path li { position: relative; }
+.path .draw { position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); pointer-events: none; }
+
+
+/* v4: greeting typed live by the motion layer (static text and blinking caret without it) */
+.greet.typed { cursor: pointer; user-select: none; }
+.greet .g-arrow { display: inline-block; color: var(--accent); }
+.greet .tag { font-size: var(--t-xs); border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px; min-width: 2.7em; text-align: center; transition: background .25s, color .25s, border-color .25s; }
+.greet .tag.hot { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.greet .caret.typing { animation: none; }
+.greet b.src:empty, .greet b.out:empty { display: none; }
+
+/* v4: intro, once per session when motion is allowed. The failsafe hides it if the scripts never run. */
+.intro { display: none; }
+.intro-on .intro { display: grid; place-items: center; position: fixed; inset: 0; z-index: 90; background: var(--paper); animation: intro-failsafe 0s 2.4s forwards; }
+.intro-on.gs .intro { animation: none; }
+@keyframes intro-failsafe { to { visibility: hidden; } }
+.intro-bars { display: flex; align-items: center; gap: 5px; height: 140px; }
+.intro-bars i { display: block; width: 4px; height: 140px; border-radius: 2px; background: var(--accent); transform: scaleY(.03); opacity: 0; }
+.hero-gsap .name .ch, .hero-gsap .portrait .frame, .hero-gsap .portrait img,
+.hero-done .name .ch, .hero-done .portrait .frame, .hero-done .portrait img { animation: none; }
+.gs .name .ch { font-variation-settings: "opsz" 96, "wght" var(--w, 300); }
+.gs .name .l2 .ch { font-variation-settings: "opsz" 96, "wght" var(--w, 800); }
+
+/* v4: path as a vertical timeline, in two columns */
+.tl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(40px, 6vw, 96px); }
+@media (max-width: 860px) { .tl { grid-template-columns: minmax(0, 1fr); } }
+.tl-head { display: flex; align-items: center; gap: 18px; font-family: var(--f-display); font-weight: 650; font-size: clamp(1.45rem, 1.15rem + 1vw, 2rem); letter-spacing: -0.025em; margin: 0 0 26px; }
+.tl-ic { width: 52px; height: 52px; flex: none; display: grid; place-items: center; border-radius: 14px; background: var(--paper-2); border: 1px solid var(--line); color: var(--accent-ink); }
+.tl-ic svg { width: 21px; height: 21px; }
+.tl-list { list-style: none; margin: 0; padding: 0; position: relative; }
+.tl-list::before, .tl-rail { content: ""; position: absolute; left: 25px; top: 4px; bottom: 26px; width: 1px; background: var(--line); }
+.tl-rail { width: 2px; margin-left: -.5px; background: var(--accent); transform-origin: 50% 0; transform: scaleY(0); z-index: 0; }
+.tl-item { position: relative; padding: 0 0 34px 68px; }
+.tl-item:last-child { padding-bottom: 0; }
+.tl-dot { position: absolute; left: 19px; top: 6px; z-index: 1; width: 13px; height: 13px; border-radius: 50%; background: var(--paper-2); border: 1px solid var(--line); display: grid; place-items: center; transition: border-color .35s, box-shadow .5s var(--ease); }
+.tl-dot::after { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); transition: transform .5s var(--ease); }
+html:not(.gs) .tl-dot, .tl-item.lit .tl-dot { border-color: var(--accent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 15%, transparent); }
+.tl-item.lit .tl-dot::after { transform: scale(1.45); }
+.tl-title { font-family: var(--f-display); font-weight: 650; font-size: clamp(1.05rem, .95rem + .45vw, 1.28rem); letter-spacing: -0.015em; line-height: 1.25; margin: 0; }
+.tl-date { font-family: var(--f-mono); font-size: var(--t-s); color: var(--accent-ink); margin: 7px 0 6px; font-variant-numeric: tabular-nums; }
+.tl-desc { color: var(--ink-2); margin: 0; max-width: 54ch; }
+.tl-item.now .tl-date b { font-weight: 600; border: 1px solid var(--accent); border-radius: 99px; padding: 0 7px; margin-left: 8px; font-size: var(--t-xs); }
+
+@media (prefers-reduced-motion: reduce) {
+  html:not(.force-motion) { scroll-behavior: auto; }
+  html:not(.force-motion) *, html:not(.force-motion) *::before, html:not(.force-motion) *::after { animation: none !important; transition: none !important; }
+  html:not(.force-motion) .ticker-track { width: auto; flex-wrap: wrap; }
+  html:not(.force-motion) .ticker-track ul[aria-hidden] { display: none; }
+  html:not(.force-motion) .ticker ul { flex-wrap: wrap; }
+  html:not(.force-motion) .cells i { background: var(--accent); }
+  html:not(.force-motion) .eye-card .s-drowsy { opacity: 0; }
+  html:not(.force-motion) .pipe .dot { display: none; }
+  html:not(.force-motion) .cursor, html:not(.force-motion) .progress { display: none !important; }
+  html:not(.force-motion) .checks li { opacity: 1; }
+}
+html.no-motion { scroll-behavior: auto; }
+html.no-motion *, html.no-motion *::before, html.no-motion *::after { animation: none !important; transition: none !important; }
+html.no-motion .ticker-track { width: auto; flex-wrap: wrap; }
+html.no-motion .ticker-track ul[aria-hidden] { display: none; }
+html.no-motion .ticker ul { flex-wrap: wrap; }
+html.no-motion .cells i { background: var(--accent); }
+html.no-motion .eye-card .s-drowsy { opacity: 0; }
+html.no-motion .pipe .dot { display: none; }
+html.no-motion .cursor, html.no-motion .progress { display: none !important; }
+html.no-motion .checks li { opacity: 1; }
+</style>
+
+</head>
+<body>
+<div class="intro" aria-hidden="true"><div class="intro-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+
+<header class="head" id="top">
+  <div class="wrap">
+    <a class="mark" href="#top" aria-label="Maako Ravelle WOUROUGOU">M<i>.</i>R<i>.</i>W</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#work"><span data-l="en">Work</span><span data-l="fr">Travaux</span></a>
+      <a href="#research"><span data-l="en">Research</span><span data-l="fr">Recherche</span></a>
+      <a href="#lab"><span data-l="en">Lab</span><span data-l="fr">Atelier</span></a>
+      <a href="#path"><span data-l="en">Path</span><span data-l="fr">Parcours</span></a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" id="lang-en" data-setlang="en" aria-pressed="true">EN</button>
+      <button type="button" id="lang-fr" data-setlang="fr" aria-pressed="false">FR</button>
+    </div>
+    <button type="button" class="motion-tg" id="motion-tg" aria-pressed="false" title="Animations"><i aria-hidden="true"></i><span class="mt-l">Animations</span></button>
+  </div>
+</header>
+<div class="progress" aria-hidden="true"></div>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-top">
+        <p class="greet" title="Mooré greeting for your time of day">
+          <span class="code">mos</span><b id="g-src">Ne y yibeoogo</b>
+          <span aria-hidden="true">&rarr;</span>
+          <span class="code"><span data-l="en">en</span><span data-l="fr">fr</span></span>
+          <b><span id="g-en" data-l="en">Good morning</span><span id="g-fr" data-l="fr">Bonjour</span><span class="caret" aria-hidden="true"></span></b>
+        </p>
+        <p class="status"><span data-l="en">Available part-time, remote</span><span data-l="fr">Disponible à mi-temps, à distance</span></p>
+      </div>
+
+      <h1 class="name" aria-label="Maako Ravelle WOUROUGOU">
+        <span class="l1" aria-hidden="true"><span class="ch" style="--i:0">M</span><span class="ch" style="--i:1">a</span><span class="ch" style="--i:2">a</span><span class="ch" style="--i:3">k</span><span class="ch" style="--i:4">o</span> <span class="ch" style="--i:5">R</span><span class="ch" style="--i:6">a</span><span class="ch" style="--i:7">v</span><span class="ch" style="--i:8">e</span><span class="ch" style="--i:9">l</span><span class="ch" style="--i:10">l</span><span class="ch" style="--i:11">e</span></span>
+        <span class="l2" aria-hidden="true"><span class="ch" style="--i:12">W</span><span class="ch" style="--i:13">O</span><span class="ch" style="--i:14">U</span><span class="ch" style="--i:15">R</span><span class="ch" style="--i:16">O</span><span class="ch" style="--i:17">U</span><span class="ch" style="--i:18">G</span><span class="ch" style="--i:19">O</span><span class="ch" style="--i:20">U</span></span>
+      </h1>
+
+      <div class="hero-grid">
+        <figure class="portrait">
+          <div class="frame"><img src="img/maako-720.webp" srcset="img/maako-440.webp 440w, img/maako-720.webp 720w" sizes="(max-width: 900px) 320px, 30vw" width="720" height="900" alt="Portrait of Maako Ravelle WOUROUGOU" fetchpriority="high" decoding="async"></div>
+          <figcaption class="label"><span data-l="en">Fès, Morocco</span><span data-l="fr">Fès, Maroc</span><span>2026</span></figcaption>
+        </figure>
+        <p class="lede">
+          <span data-l="en">AI engineer from Burkina Faso, based in Fès. I build speech and translation systems for languages with little data, and agents that do real work. Full-time PhD candidate in AI for cybersecurity.</span>
+          <span data-l="fr">Ingénieur IA burkinabè, basé à Fès. Je construis des systèmes de parole et de traduction pour des langues peu dotées, et des agents qui font un vrai travail. Doctorant à temps plein en IA pour la cybersécurité.</span>
+        </p>
+        <ul class="facts-hero">
+          <li><span><span data-l="en">Focus</span><span data-l="fr">Domaines</span></span><span><span data-l="en">Speech, NLP, vision, agents</span><span data-l="fr">Parole, TAL, vision, agents</span></span></li>
+          <li><span><span data-l="en">Degree</span><span data-l="fr">Diplôme</span></span><span><span data-l="en">State Engineer in AI, UEMF</span><span data-l="fr">Ingénieur d’État en IA, UEMF</span></span></li>
+          <li><span><span data-l="en">Languages</span><span data-l="fr">Langues</span></span><span><span data-l="en">French, English, Spanish</span><span data-l="fr">Français, anglais, espagnol</span></span></li>
+        </ul>
+        <div class="cta">
+          <a class="btn solid" href="#work"><span data-l="en">See the work</span><span data-l="fr">Voir les travaux</span>
+            <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v11M2 7.5 7 12.5l5-5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+          <a class="btn ghost" href="#contact"><span data-l="en">Write to me</span><span data-l="fr">M’écrire</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wave-band">
+      <canvas id="wave" aria-hidden="true"></canvas>
+      <span class="label"><span data-l="en">Move your cursor over the signal</span><span data-l="fr">Passez le curseur sur le signal</span></span>
+    </div>
+
+    <div class="ticker" aria-label="Figures">
+      <div class="ticker-track">
+        <ul>
+          <li><b><span data-l="en">88.4</span><span data-l="fr">88,4</span></b><span><span data-l="en">GPU hours · Mooré study</span><span data-l="fr">heures de GPU · étude mooré</span></span></li>
+          <li><b>45</b><span><span data-l="en">LoRA adapters</span><span data-l="fr">adaptateurs LoRA</span></span></li>
+          <li><b>290</b><span><span data-l="en">tests · Nylah</span><span data-l="fr">tests · Nylah</span></span></li>
+          <li><b>386</b><span><span data-l="en">tests · PhantomProbe</span><span data-l="fr">tests · PhantomProbe</span></span></li>
+          <li><b>&lt;200&nbsp;ms</b><span><span data-l="en">mean latency · Fongbé API</span><span data-l="fr">latence moyenne · API fongbé</span></span></li>
+          <li><b><span data-l="en">10,000+</span><span data-l="fr">10&nbsp;000+</span></b><span><span data-l="en">data points a day · strategic watch</span><span data-l="fr">points de données par jour · veille</span></span></li>
+          <li><b><span data-l="en">0.772 → 0.163</span><span data-l="fr">0,772 → 0,163</span></b><span><span data-l="en">F1 after SMOTE · TON_IoT mitm</span><span data-l="fr">F1 après SMOTE · TON_IoT mitm</span></span></li>
+          <li><b>12</b><span><span data-l="en">model providers, one interface</span><span data-l="fr">fournisseurs de modèles, une interface</span></span></li>
+        </ul>
+        <ul aria-hidden="true">
+          <li><b><span data-l="en">88.4</span><span data-l="fr">88,4</span></b><span><span data-l="en">GPU hours · Mooré study</span><span data-l="fr">heures de GPU · étude mooré</span></span></li>
+          <li><b>45</b><span><span data-l="en">LoRA adapters</span><span data-l="fr">adaptateurs LoRA</span></span></li>
+          <li><b>290</b><span><span data-l="en">tests · Nylah</span><span data-l="fr">tests · Nylah</span></span></li>
+          <li><b>386</b><span><span data-l="en">tests · PhantomProbe</span><span data-l="fr">tests · PhantomProbe</span></span></li>
+          <li><b>&lt;200&nbsp;ms</b><span><span data-l="en">mean latency · Fongbé API</span><span data-l="fr">latence moyenne · API fongbé</span></span></li>
+          <li><b><span data-l="en">10,000+</span><span data-l="fr">10&nbsp;000+</span></b><span><span data-l="en">data points a day · strategic watch</span><span data-l="fr">points de données par jour · veille</span></span></li>
+          <li><b><span data-l="en">0.772 → 0.163</span><span data-l="fr">0,772 → 0,163</span></b><span><span data-l="en">F1 after SMOTE · TON_IoT mitm</span><span data-l="fr">F1 après SMOTE · TON_IoT mitm</span></span></li>
+          <li><b>12</b><span><span data-l="en">model providers, one interface</span><span data-l="fr">fournisseurs de modèles, une interface</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="work">
+    <div class="wrap">
+      <div class="sec-head" data-anim>
+        <h2><span data-l="en">Selected work</span><span data-l="fr">Travaux choisis</span></h2>
+        <p><span data-l="en">Ten projects, from a private agent system to a grader that reads phone photos.</span><span data-l="fr">Dix projets, d’un système d’agents privé à un correcteur qui lit des photos prises au téléphone.</span></p>
+      </div>
+
+      <div class="work">
+        <nav class="idx" aria-label="Projects">
+          <a href="#nylah"><span>A</span><span>Nylah</span></a>
+          <a href="#voice"><span>B</span><span>Lecteur vocal</span></a>
+          <a href="#fongbe"><span>C</span><span><span data-l="en">Fongbé speech API</span><span data-l="fr">API vocale fongbé</span></span></a>
+          <a href="#watch"><span>D</span><span><span data-l="en">Strategic watch</span><span data-l="fr">Veille stratégique</span></span></a>
+          <a href="#consistia"><span>E</span><span>CONSISTIA</span></a>
+          <a href="#phantomprobe"><span>F</span><span>PhantomProbe</span></a>
+          <a href="#openstar"><span>G</span><span>OpenStar</span></a>
+          <a href="#sofato"><span>H</span><span><span data-l="en">SOFATO invitations</span><span data-l="fr">Invitations SOFATO</span></span></a>
+          <a href="#grader"><span>I</span><span><span data-l="en">Bubble-sheet grader</span><span data-l="fr">Correcteur de QCM</span></span></a>
+          <a href="#drowsiness"><span>J</span><span><span data-l="en">Drowsiness detection</span><span data-l="fr">Détection de somnolence</span></span></a>
+        </nav>
+
+        <div>
+          <!-- Nylah -->
+          <article class="case" id="nylah">
+            <div class="case-head">
+              <p class="label"><span data-l="en">Agent system · 2026 · Python</span><span data-l="fr">Système d’agents · 2026 · Python</span></p>
+              <h3>Nylah</h3>
+              <p class="lede-2"><span data-l="en">My personal AI assistant. It splits a hard goal into a task graph, runs workers in parallel waves, checks its own answer, and tells me when something failed.</span><span data-l="fr">Mon assistant IA personnel. Il découpe un objectif difficile en graphe de tâches, lance des agents en vagues parallèles, vérifie sa propre réponse et me dit quand quelque chose a échoué.</span></p>
+            </div>
+            <div class="case-body rise">
+              <div>
+                <ul class="points">
+                  <li><span data-l="en">12 model providers behind one interface, local-first with Ollama.</span><span data-l="fr">12 fournisseurs de modèles derrière une seule interface, en local d’abord avec Ollama.</span></li>
+                  <li><span data-l="en">Mixture-of-agents and fallback chains that the rest of the system uses like a single model.</span><span data-l="fr">Mélange d’agents et chaînes de repli que le reste du système utilise comme un seul modèle.</span></li>
+                  <li><span data-l="en">Telegram and terminal front-ends, voice notes, files and image understanding.</span><span data-l="fr">Interfaces Telegram et terminal, messages vocaux, fichiers et compréhension d’images.</span></li>
+                  <li><span data-l="en">Memory recalled by similarity, scheduled jobs, background tasks and an audit log of every action.</span><span data-l="fr">Mémoire rappelée par similarité, tâches planifiées, travaux de fond et journal d’audit de chaque action.</span></li>
+                  <li><span data-l="en">About 7,700 lines of Python, 3 runtime dependencies, 290 automated tests.</span><span data-l="fr">Environ 7&nbsp;700 lignes de Python, 3 dépendances, 290 tests automatisés.</span></li>
+                </ul>
+                <p class="note"><svg viewBox="0 0 14 14" aria-hidden="true"><rect x="2.5" y="6" width="9" height="6.5" rx="1" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span data-l="en">Private repository. I walk through the code on request.</span><span data-l="fr">Dépôt privé. Je présente le code sur demande.</span></p>
+              </div>
+
+              <div class="term" id="term">
+                <div class="term-bar">
+                  <span><span data-l="en">session replay · personal details redacted</span><span data-l="fr">rejeu de session · données personnelles masquées</span></span>
+                  <button type="button" id="replay"><span data-l="en">Replay</span><span data-l="fr">Rejouer</span></button>
+                </div>
+                <div class="term-body"><pre><span class="tl box">┌──────────────────────────────────────────┐</span><span class="tl box">│ <span class="t-acc">◆ N Y L A H</span>                              │</span><span class="tl box">│ <span class="t-dim">sharp · loyal · yours</span>                    │</span><span class="tl box">├──────────────────────────────────────────┤</span><span class="tl box">│ <span class="t-dim">model</span>      <span class="t-fg">deepseek:deepseek-v4-flash</span>    │</span><span class="tl box">│ <span class="t-dim">workspace</span>  <span class="rd" style="--w:3ch"></span>                           │</span><span class="tl box">│ <span class="t-dim">memory</span>     <span class="t-fg">80 facts · 0 scheduled job(s)</span> │</span><span class="tl box">└──────────────────────────────────────────┘</span><span class="tl t-dim">  (resuming a previous conversation, 13 messages)</span><span class="tl"> </span><span class="tl" data-type data-d="400"><span class="t-acc">you ›</span> <span class="ty">Hey. Can you resume the last projects we were on??</span></span><span class="tl" data-d="500"><span class="t-acc">  ▸</span> recall <span class="t-dim">5 memory/ies</span></span><span class="tl" data-d="260"><span class="t-acc">  ▸</span> terminal <span class="t-dim">{'command': 'ls -la ~ … pwd …'}</span></span><span class="tl t-ok" data-d="200">    ✓ <span class="rd" style="--w:30ch"></span></span><span class="tl" data-d="260"><span class="t-acc">  ▸</span> schedule <span class="t-dim">{'action': 'list'}</span></span><span class="tl t-ok" data-d="200">    ✓ No scheduled jobs.</span><span class="tl" data-d="260"><span class="t-acc">  ▸</span> task <span class="t-dim">{'action': 'list'}</span></span><span class="tl t-ok" data-d="200">    ✓ No tasks yet.</span><span class="tl" data-d="260"><span class="t-acc">  ▸</span> terminal <span class="t-dim">{'command': 'ls -la /<span class="rd" style="--w:7ch"></span> …'}</span></span><span class="tl t-ok" data-d="200">    ✓ <span class="rd" style="--w:26ch"></span></span><span class="tl" data-d="260"><span class="t-acc">  ▸</span> terminal <span class="t-dim">{'command': 'cat /<span class="rd" style="--w:6ch"></span> …'}</span></span><span class="tl t-ok" data-d="200">    ✓ <span class="rd" style="--w:18ch"></span></span><span class="tl" data-d="260"><span class="t-acc">  ▸</span> read_file <span class="t-dim">{'path': '/<span class="rd" style="--w:7ch"></span>/results_1106b.json'}</span></span><span class="tl t-ok" data-d="200">    ✓ { <span class="rd" style="--w:24ch"></span> }</span><span class="tl" data-d="260"><span class="t-acc">  ▸</span> read_file <span class="t-dim">{'path': '/<span class="rd" style="--w:7ch"></span>/results_1106.json'}</span></span><span class="tl t-ok" data-d="200">    ✓ { <span class="rd" style="--w:24ch"></span> }</span><span class="tl"> </span><span class="tl" data-d="700"><span class="t-acc">◆ nylah</span> <span class="t-dim">· 12.4s · 7 tool call(s)</span></span><span class="tl" data-d="300">  Voilà, j'ai retrouvé tout le contexte. Voici la reprise.</span><span class="tl" data-d="160">  <span class="t-b">## Où on en était</span></span><span class="tl" data-d="160">  Projet principal : <span class="rd" style="--w:34ch"></span></span><span class="tl" data-d="120">  <span class="rd" style="--w:44ch"></span></span><span class="tl" data-d="120">  <span class="rd" style="--w:38ch"></span></span></pre></div>
+              </div>
+            </div>
+
+            <p class="sub-h"><span data-l="en">It reports failure instead of faking progress.</span><span data-l="fr">Il signale l’échec au lieu de simuler l’avancement.</span></p>
+            <div class="duo rise">
+              <figure>
+                <div class="phone"><img src="img/nylah-honest.webp" width="540" height="1104" loading="lazy" decoding="async" alt="Telegram message from Nylah admitting the file is not built yet, explaining what went wrong and offering two options."></div>
+                <figcaption><b>16:02</b><span data-l="en">It admits the file is not finished, explains why, and offers two options.</span><span data-l="fr">Il admet que le fichier n’est pas terminé, explique pourquoi et propose deux options.</span></figcaption>
+              </figure>
+              <figure>
+                <div class="phone"><img src="img/nylah-delivered.webp" width="540" height="1104" loading="lazy" decoding="async" alt="Telegram conversation where Nylah sends a rebuilt Windows Task Manager page, its screenshot and the HTML file."></div>
+                <figcaption><b>16:45</b><span data-l="en">Four minutes after the go: the finished page and its screenshot.</span><span data-l="fr">Quatre minutes après le feu vert&nbsp;: la page terminée et sa capture.</span></figcaption>
+              </figure>
+            </div>
+
+            <p class="sub-h"><span data-l="en">How it is built</span><span data-l="fr">Comment il est construit</span></p>
+            <ol class="stack" aria-label="Layers, top to bottom">
+              <li><code>channels/</code><span><span data-l="en">Telegram bot and terminal chat over the same engine.</span><span data-l="fr">Bot Telegram et terminal sur le même moteur.</span></span></li>
+              <li><code>orchestrator/</code><span><span data-l="en">Plans a goal into a task graph, runs it in waves, replans, verifies the answer.</span><span data-l="fr">Découpe un objectif en graphe de tâches, l’exécute par vagues, replanifie, vérifie la réponse.</span></span></li>
+              <li><code>agent/</code><span><span data-l="en">One turn loop, the only worker. A failed tool comes back as data, never as a crash.</span><span data-l="fr">Une seule boucle, le seul agent d’exécution. Un outil en échec revient comme une donnée, jamais comme un plantage.</span></span></li>
+              <li><code>identity/</code><span><span data-l="en">A character for Nylah and a profile of its user, framed into every prompt.</span><span data-l="fr">Un caractère pour Nylah et un profil de son utilisateur, intégrés à chaque prompt.</span></span></li>
+              <li><code>memory/ tasks/ scheduler/</code><span><span data-l="en">Facts recalled by similarity, background goals with live progress, timed jobs.</span><span data-l="fr">Faits rappelés par similarité, objectifs de fond suivis en direct, tâches à heure fixe.</span></span></li>
+              <li><code>audit/</code><span><span data-l="en">An append-only record of every tool action.</span><span data-l="fr">Une trace en ajout seul de chaque action d’outil.</span></span></li>
+              <li><code>tools/ skills/ mcp/</code><span><span data-l="en">Capabilities described in JSON Schema, with an approval gate on risky ones.</span><span data-l="fr">Capacités décrites en JSON Schema, avec une approbation pour les plus risquées.</span></span></li>
+              <li><code>providers/</code><span><span data-l="en">12 backends, mixture-of-agents and fallback chains behind one interface.</span><span data-l="fr">12 backends, mélange d’agents et chaînes de repli derrière une seule interface.</span></span></li>
+            </ol>
+            <p class="stack-cap"><span data-l="en">Each layer depends only on the layers below it.</span><span data-l="fr">Chaque couche ne dépend que des couches situées en dessous.</span></p>
+          </article>
+
+          <!-- Lecteur vocal -->
+          <article class="case" id="voice">
+            <div class="case-head">
+              <p class="label"><span data-l="en">Browser extension · 2026 · JavaScript</span><span data-l="fr">Extension de navigateur · 2026 · JavaScript</span></p>
+              <h3>Lecteur vocal</h3>
+              <p class="lede-2"><span data-l="en">A Chrome and Edge extension that reads web articles, PDFs and selected text aloud, with natural neural voices that run offline. Built for reading research papers in French and English.</span><span data-l="fr">Une extension Chrome et Edge qui lit à voix haute les articles web, les PDF et le texte sélectionné, avec des voix neuronales naturelles qui fonctionnent hors ligne. Pensée pour lire des articles scientifiques en français et en anglais.</span></p>
+            </div>
+            <div class="case-body rise">
+              <div>
+                <ul class="points">
+                  <li><span data-l="en">Piper neural voices in French and English, computed on the computer: no text leaves the machine.</span><span data-l="fr">Voix neuronales Piper en français et en anglais, calculées sur l’ordinateur&nbsp;: aucun texte ne quitte la machine.</span></li>
+                  <li><span data-l="en">Clean extraction of articles and PDFs, without menus, headers or page numbers.</span><span data-l="fr">Extraction propre des articles et des PDF, sans menus, en-têtes ni numéros de page.</span></li>
+                  <li><span data-l="en">In research papers, citation calls like [12] and the bibliography are skipped.</span><span data-l="fr">Dans les articles scientifiques, les appels de citation comme [12] et la bibliographie sont sautés.</span></li>
+                  <li><span data-l="en">Sentence and word highlighting with auto-scroll, and automatic language detection.</span><span data-l="fr">Surlignage de la phrase et du mot en cours, défilement automatique et détection de la langue.</span></li>
+                </ul>
+                <p class="note"><svg viewBox="0 0 14 14" aria-hidden="true"><rect x="2.5" y="6" width="9" height="6.5" rx="1" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span data-l="en">Private repository for now.</span><span data-l="fr">Dépôt privé pour l’instant.</span></p>
+                <p class="links"><a href="lecteur-vocal/confidentialite.html"><span data-l="en">Privacy policy</span><span data-l="fr">Politique de confidentialité</span></a></p>
+              </div>
+              <div class="reader" id="reader">
+                <p class="reader-text" data-l="en"><span class="s">Data augmentation is often treated as a free win on imbalanced intrusion data.</span> <span class="s">On several attack classes, our benchmark shows the opposite <span class="cite">[12]</span>.</span> <span class="s">The reader skips that citation and moves on.</span></p>
+                <p class="reader-text" data-l="fr"><span class="s">L’augmentation de données passe souvent pour un gain gratuit sur des données d’intrusion déséquilibrées.</span> <span class="s">Sur plusieurs classes d’attaque, notre banc d’essai montre l’inverse <span class="cite">[12]</span>.</span> <span class="s">Le lecteur saute cet appel et continue.</span></p>
+                <div class="player" aria-hidden="true">
+                  <i><svg viewBox="0 0 12 12"><path d="M3 2v8M10 2 4.5 6 10 10z" fill="currentColor" stroke="currentColor" stroke-width="1.2"/></svg></i>
+                  <i class="main"><svg viewBox="0 0 12 12"><path d="M3.5 2v8M8.5 2v8" stroke="currentColor" stroke-width="2"/></svg></i>
+                  <i><svg viewBox="0 0 12 12"><path d="M9 2v8M2 2l5.5 4L2 10z" fill="currentColor" stroke="currentColor" stroke-width="1.2"/></svg></i>
+                  <span>1.2×</span><span class="track"><b></b></span><span>Piper</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Fongbé -->
+          <article class="case" id="fongbe">
+            <div class="case-head">
+              <p class="label"><span data-l="en">Speech &amp; translation · 2024–2025 · ByteInnovIT, remote</span><span data-l="fr">Parole et traduction · 2024–2025 · ByteInnovIT, à distance</span></p>
+              <h3><span data-l="en">Fongbé speech and translation API</span><span data-l="fr">API de parole et de traduction en fongbé</span></h3>
+              <p class="lede-2"><span data-l="en">Translation, speech recognition and speech synthesis for Fongbé, a language of Benin with very little digital text, served as one API.</span><span data-l="fr">Traduction, reconnaissance et synthèse vocales pour le fongbé, une langue du Bénin avec très peu de texte numérique, servies par une seule API.</span></p>
+            </div>
+            <div class="case-body rise">
+              <ul class="points">
+                <li><span data-l="en">mBART-50 fine-tuned for French–Fongbé translation.</span><span data-l="fr">mBART-50 affiné pour la traduction français-fongbé.</span></li>
+                <li><span data-l="en">Speech recognition and speech synthesis around the translation model.</span><span data-l="fr">Reconnaissance et synthèse vocales autour du modèle de traduction.</span></li>
+                <li><span data-l="en">In production as a REST API with FastAPI, Docker and Redis.</span><span data-l="fr">En production sous forme d’API REST avec FastAPI, Docker et Redis.</span></li>
+              </ul>
+              <div class="flow" data-anim>
+                <div class="flow-rows" aria-hidden="true"><div class="flow-row"><div class="node"><div class="bars"><i style="--d:0"></i><i style="--d:3"></i><i style="--d:1"></i><i style="--d:5"></i><i style="--d:2"></i><i style="--d:6"></i><i style="--d:4"></i></div><span class="label"><span data-l="en">voice</span><span data-l="fr">voix</span></span></div><span class="arrow"></span><span class="step">ASR</span><span class="arrow"></span><div class="node"><div class="txt"><i></i><i></i><i></i></div><span class="label">fongbé</span></div></div><div class="flow-row"><div class="node"><div class="txt"><i></i><i></i><i></i></div><span class="label">fongbé</span></div><span class="arrow"></span><span class="step">MT</span><span class="arrow"></span><div class="node"><div class="txt"><i></i><i></i><i></i></div><span class="label">français</span></div></div><div class="flow-row"><div class="node"><div class="txt"><i></i><i></i><i></i></div><span class="label">français</span></div><span class="arrow"></span><span class="step">TTS</span><span class="arrow"></span><div class="node"><div class="bars"><i style="--d:4"></i><i style="--d:1"></i><i style="--d:6"></i><i style="--d:2"></i><i style="--d:5"></i><i style="--d:0"></i><i style="--d:3"></i></div><span class="label"><span data-l="en">voice</span><span data-l="fr">voix</span></span></div></div></div>
+                <div class="latency"><b data-count="200" data-pre="&lt;" data-suf="&nbsp;ms">&lt;200&nbsp;ms</b><span><span data-l="en">mean API latency in production</span><span data-l="fr">latence moyenne de l’API en production</span></span></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Strategic watch -->
+          <article class="case" id="watch">
+            <div class="case-head">
+              <p class="label"><span data-l="en">LLM pipeline · 2024 · Les Domaines Agricoles, Casablanca</span><span data-l="fr">Pipeline LLM · 2024 · Les Domaines Agricoles, Casablanca</span></p>
+              <h3><span data-l="en">Strategic watch for agriculture</span><span data-l="fr">Veille stratégique agricole</span></h3>
+              <p class="lede-2"><span data-l="en">An architecture that collects market, competitor and technology news every day, then classifies and summarizes it with GPT-4 into watch reports.</span><span data-l="fr">Une architecture qui collecte chaque jour l’actualité des marchés, des concurrents et des technologies, puis la classe et la résume avec GPT-4 en rapports de veille.</span></p>
+            </div>
+            <div class="case-body rise">
+              <ul class="points">
+                <li><span data-l="en">AI-assisted collection: Playwright browsers driven by an LLM, rotating proxies and anti-bot handling, alongside Scrapy and ScrapeGraphAI.</span><span data-l="fr">Collecte assistée par l’IA&nbsp;: navigateurs Playwright pilotés par un LLM, rotation de proxys et gestion des protections anti-robots, avec Scrapy et ScrapeGraphAI.</span></li>
+                <li><span data-l="en">More than 10,000 data points collected a day.</span><span data-l="fr">Plus de 10&nbsp;000 points de données collectés par jour.</span></li>
+                <li><span data-l="en">Analysis, classification and synthesis with GPT-4.</span><span data-l="fr">Analyse, classification et synthèse avec GPT-4.</span></li>
+                <li><span data-l="en">Reports delivered to the head of the strategic watch department.</span><span data-l="fr">Rapports remis à la directrice du département de veille stratégique.</span></li>
+              </ul>
+              <div class="pipe">
+                <svg class="pipe-h" viewBox="0 0 640 200" role="img" aria-label="Sources flow into collection, then GPT-4, then reports">
+                  <path class="ln" id="p1" d="M110 40 C170 40 170 100 230 100"/>
+                  <path class="ln" id="p2" d="M110 100 L230 100"/>
+                  <path class="ln" id="p3" d="M110 160 C170 160 170 100 230 100"/>
+                  <path class="ln" id="p4" d="M330 100 L400 100"/>
+                  <path class="ln" id="p5" d="M490 100 L540 100"/>
+                  <rect class="nd" x="10" y="26" width="100" height="28" rx="4"/>
+                  <rect class="nd" x="10" y="86" width="100" height="28" rx="4"/>
+                  <rect class="nd" x="10" y="146" width="100" height="28" rx="4"/>
+                  <text x="60" y="44" text-anchor="middle"><tspan data-l="en">markets</tspan><tspan data-l="fr">marchés</tspan></text>
+                  <text x="60" y="104" text-anchor="middle"><tspan data-l="en">competitors</tspan><tspan data-l="fr">concurrents</tspan></text>
+                  <text x="60" y="164" text-anchor="middle"><tspan data-l="en">technology</tspan><tspan data-l="fr">technologies</tspan></text>
+                  <rect class="nd" x="230" y="80" width="100" height="40" rx="4"/>
+                  <text x="280" y="104" text-anchor="middle"><tspan data-l="en">AI collection</tspan><tspan data-l="fr">collecte IA</tspan></text>
+                  <rect class="nd hot" x="400" y="80" width="90" height="40" rx="4"/>
+                  <text class="on" x="445" y="104" text-anchor="middle">GPT-4</text>
+                  <rect class="nd" x="540" y="80" width="90" height="40" rx="4"/>
+                  <text x="585" y="104" text-anchor="middle"><tspan data-l="en">reports</tspan><tspan data-l="fr">rapports</tspan></text>
+                  <circle class="dot" r="3.5"><animateMotion dur="2.6s" repeatCount="indefinite"><mpath href="#p1"/></animateMotion></circle>
+                  <circle class="dot" r="3.5"><animateMotion dur="2.2s" begin="0.7s" repeatCount="indefinite"><mpath href="#p2"/></animateMotion></circle>
+                  <circle class="dot" r="3.5"><animateMotion dur="2.9s" begin="1.3s" repeatCount="indefinite"><mpath href="#p3"/></animateMotion></circle>
+                  <circle class="dot" r="3.5"><animateMotion dur="1.4s" repeatCount="indefinite"><mpath href="#p4"/></animateMotion></circle>
+                  <circle class="dot" r="3.5"><animateMotion dur="1.2s" begin="0.4s" repeatCount="indefinite"><mpath href="#p5"/></animateMotion></circle>
+                  <text x="20" y="196" class="sm"><tspan data-l="en">10,000+ data points a day</tspan><tspan data-l="fr">10 000+ points de données par jour</tspan></text>
+                </svg>
+                <svg class="pipe-v" viewBox="0 0 300 340" role="img" aria-label="Sources flow into collection, then GPT-4, then reports">
+                  <path class="ln" id="q1" d="M55 46 C55 90 150 80 150 120"/>
+                  <path class="ln" id="q2" d="M150 46 L150 120"/>
+                  <path class="ln" id="q3" d="M245 46 C245 90 150 80 150 120"/>
+                  <path class="ln" id="q4" d="M150 160 L150 200"/>
+                  <path class="ln" id="q5" d="M150 240 L150 270"/>
+                  <rect class="nd" x="6" y="18" width="98" height="28" rx="4"/><rect class="nd" x="106" y="18" width="88" height="28" rx="4"/><rect class="nd" x="196" y="18" width="98" height="28" rx="4"/>
+                  <text x="55" y="36" text-anchor="middle"><tspan data-l="en">markets</tspan><tspan data-l="fr">marchés</tspan></text>
+                  <text x="150" y="36" text-anchor="middle"><tspan data-l="en">competitors</tspan><tspan data-l="fr">concurrents</tspan></text>
+                  <text x="245" y="36" text-anchor="middle"><tspan data-l="en">technology</tspan><tspan data-l="fr">technologies</tspan></text>
+                  <rect class="nd" x="100" y="120" width="100" height="40" rx="4"/><text x="150" y="144" text-anchor="middle"><tspan data-l="en">AI collection</tspan><tspan data-l="fr">collecte IA</tspan></text>
+                  <rect class="nd hot" x="100" y="200" width="100" height="40" rx="4"/><text class="on" x="150" y="224" text-anchor="middle">GPT-4</text>
+                  <rect class="nd" x="100" y="270" width="100" height="40" rx="4"/><text x="150" y="294" text-anchor="middle"><tspan data-l="en">reports</tspan><tspan data-l="fr">rapports</tspan></text>
+                  <circle class="dot" r="3.5"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#q1"/></animateMotion></circle>
+                  <circle class="dot" r="3.5"><animateMotion dur="2s" begin="0.6s" repeatCount="indefinite"><mpath href="#q2"/></animateMotion></circle>
+                  <circle class="dot" r="3.5"><animateMotion dur="2.7s" begin="1.2s" repeatCount="indefinite"><mpath href="#q3"/></animateMotion></circle>
+                  <circle class="dot" r="3.5"><animateMotion dur="1.3s" repeatCount="indefinite"><mpath href="#q4"/></animateMotion></circle>
+                  <circle class="dot" r="3.5"><animateMotion dur="1.1s" begin="0.4s" repeatCount="indefinite"><mpath href="#q5"/></animateMotion></circle>
+                  <text x="150" y="334" text-anchor="middle"><tspan data-l="en">10,000+ data points a day</tspan><tspan data-l="fr">10 000+ points de données par jour</tspan></text>
+                </svg>
+              
+              </div>
+            </div>
+          </article>
+
+          <!-- CONSISTIA -->
+          <article class="case" id="consistia">
+            <div class="case-head">
+              <p class="label"><span data-l="en">Document AI · 2025 · Python</span><span data-l="fr">IA documentaire · 2025 · Python</span></p>
+              <h3>CONSISTIA</h3>
+              <p class="lede-2"><span data-l="en">Checks marketing documents against a brand charter. It reads PDFs and images, pulls the rules out of the charter with a local LLaMA 3.1 model, then flags every color, font or word that breaks them.</span><span data-l="fr">Vérifie des documents marketing par rapport à une charte de marque. Il lit les PDF et les images, extrait les règles de la charte avec un modèle LLaMA 3.1 local, puis signale chaque couleur, police ou mot qui les enfreint.</span></p>
+            </div>
+            <div class="case-body rise">
+              <ul class="points">
+                <li><span data-l="en">Rules extracted from charter PDFs with LLaMA 3.1 running in Ollama.</span><span data-l="fr">Règles extraites des chartes PDF avec LLaMA 3.1 dans Ollama.</span></li>
+                <li><span data-l="en">Tesseract OCR for scans, Groq multimodal models for visual checks.</span><span data-l="fr">OCR Tesseract pour les scans, modèles multimodaux Groq pour les contrôles visuels.</span></li>
+                <li><span data-l="en">FastAPI backend and Streamlit interface, shipped as one Docker Compose stack.</span><span data-l="fr">Backend FastAPI et interface Streamlit, livrés en une seule pile Docker Compose.</span></li>
+              </ul>
+              <div class="audit" aria-hidden="true">
+                <div class="page"><i class="band"></i><i class="ttl"></i><i class="ln"></i><i class="ln"></i><i class="ln bad"></i><i class="ln s"></i><i class="img"></i><i class="ln"></i><i class="ln s"></i><i class="scan"></i></div>
+                <div>
+                  <ul class="checks">
+                    <li class="ok" style="--i:0"><b>✓</b><span><span data-l="en">Primary color #058A8A</span><span data-l="fr">Couleur principale #058A8A</span></span></li>
+                    <li class="ok" style="--i:1"><b>✓</b><span><span data-l="en">Heading font</span><span data-l="fr">Police des titres</span></span></li>
+                    <li class="ok" style="--i:2"><b>✓</b><span><span data-l="en">Required tagline</span><span data-l="fr">Slogan obligatoire</span></span></li>
+                    <li class="ko" style="--i:3"><b>✗</b><span><span data-l="en">Forbidden word: “cheap”</span><span data-l="fr">Mot interdit&nbsp;: «&nbsp;cheap&nbsp;»</span></span></li>
+                    <li class="ok" style="--i:4"><b>✓</b><span><span data-l="en">Length: 120 to 400 words</span><span data-l="fr">Longueur&nbsp;: de 120 à 400 mots</span></span></li>
+                  </ul>
+                  <p class="label" style="margin-top:14px"><span data-l="en">Illustration of a report</span><span data-l="fr">Illustration d’un rapport</span></p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- PhantomProbe -->
+          <article class="case" id="phantomprobe">
+            <div class="case-head">
+              <p class="label"><span data-l="en">Security tool · open source · MIT</span><span data-l="fr">Outil de sécurité · open source · MIT</span></p>
+              <h3>PhantomProbe</h3>
+              <p class="lede-2"><span data-l="en">Passive-first reconnaissance for penetration testers. It maps an attack surface, ranks what is actually exploitable, and stays quiet on a well-configured target.</span><span data-l="fr">Reconnaissance passive d’abord, pour les tests d’intrusion. Il cartographie la surface d’attaque, classe ce qui est vraiment exploitable et reste silencieux sur une cible bien configurée.</span></p>
+            </div>
+            <div class="case-body rise">
+              <div>
+                <ul class="points">
+                  <li><span data-l="en">The core runs on the Python standard library alone.</span><span data-l="fr">Le cœur tourne sur la seule bibliothèque standard de Python.</span></li>
+                  <li><span data-l="en">A CVE that CISA lists as exploited outranks a higher-scored one nobody uses (KEV and EPSS).</span><span data-l="fr">Une CVE exploitée selon la CISA passe devant une CVE mieux notée que personne n’utilise (KEV et EPSS).</span></li>
+                  <li><span data-l="en">386 automated tests, published on PyPI.</span><span data-l="fr">386 tests automatisés, publié sur PyPI.</span></li>
+                </ul>
+                <p class="links">
+                  <a href="https://github.com/Ravel226/PhantomProbe" target="_blank" rel="noopener">github.com/Ravel226/PhantomProbe ↗</a>
+                  <a href="https://pypi.org/project/phantomprobe/" target="_blank" rel="noopener">pypi.org/project/phantomprobe ↗</a>
+                </p>
+              </div>
+              <div class="term">
+                <div class="term-bar"><span>quick start</span></div>
+                <div class="term-body"><pre><span class="t-dim">$</span> pip install phantomprobe
+<span class="t-dim">$</span> phantomprobe example.com
+<span class="t-dim">  # passive only: reads what the target already sends</span>
+
+<span class="t-dim">$</span> phantomprobe example.com --phase2 --cve
+<span class="t-dim">  # active recon, CVEs ranked by </span><span class="t-acc">KEV</span><span class="t-dim"> then </span><span class="t-acc">EPSS</span>
+
+<span class="t-ok">✓</span> report-example.com.md
+<span class="t-ok">✓</span> report-example.com.json</pre></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- OpenStar -->
+          <article class="case" id="openstar">
+            <div class="case-head">
+              <p class="label"><span data-l="en">OSINT · in progress · FastAPI, three.js</span><span data-l="fr">OSINT · en cours · FastAPI, three.js</span></p>
+              <h3>OpenStar</h3>
+              <p class="lede-2"><span data-l="en">A self-hosted OSINT dashboard: open-source intelligence tools behind one interface and one 3D globe, with the doxxing features deliberately left out.</span><span data-l="fr">Un tableau de bord OSINT auto-hébergé&nbsp;: des outils de renseignement open source derrière une seule interface et un globe 3D, sans les fonctions de fichage de personnes, écartées volontairement.</span></p>
+            </div>
+            <div class="case-body rise">
+              <div>
+                <ul class="points">
+                  <li><span data-l="en">Live public layers: aircraft, earthquakes, satellites propagated in the browser, traffic cameras and launches.</span><span data-l="fr">Couches publiques en direct&nbsp;: avions, séismes, satellites calculés dans le navigateur, caméras de trafic et lancements.</span></li>
+                  <li><span data-l="en">Modules for usernames, crypto flows and network scans, each a thin layer over a mature open-source engine.</span><span data-l="fr">Modules pour les pseudonymes, les flux crypto et les scans réseau, chacun posé sur un moteur open source éprouvé.</span></li>
+                  <li><span data-l="en">Excluded by design: breach dossiers on people, tracking links, facial recognition.</span><span data-l="fr">Exclus par conception&nbsp;: dossiers de fuites sur des personnes, liens de pistage, reconnaissance faciale.</span></li>
+                </ul>
+                <p class="note"><svg viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.2" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M7 4v3.2l2 1.3" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span data-l="en">In progress, not public yet.</span><span data-l="fr">En cours, pas encore public.</span></p>
+              </div>
+              <div class="globe">
+                <canvas id="globe" aria-hidden="true"></canvas>
+                <div class="legend"><span style="--c:var(--term-fg)"><span data-l="en">land grid</span><span data-l="fr">grille</span></span><span style="--c:var(--term-acc)">satellites</span><span style="--c:var(--term-warn)"><span data-l="en">earthquakes</span><span data-l="fr">séismes</span></span></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- SOFATO -->
+          <article class="case" id="sofato">
+            <div class="case-head">
+              <p class="label"><span data-l="en">Client work · 2025 · web</span><span data-l="fr">Projet client · 2025 · web</span></p>
+              <h3><span data-l="en">Animated invitations for SOFATO</span><span data-l="fr">Invitations animées pour SOFATO</span></h3>
+              <p class="lede-2"><span data-l="en">Digital invitations for SOFATO (Société Faso Tomate) and the Guinness World Record attempt of chef Djenebou Banao. Each guest opens a floating envelope that releases confetti and their invitation cards.</span><span data-l="fr">Des invitations numériques pour SOFATO (Société Faso Tomate) et la tentative de record du monde Guinness de la cheffe Djenebou Banao. Chaque invité ouvre une enveloppe flottante qui libère des confettis et ses cartes d’invitation.</span></p>
+            </div>
+            <div class="case-body rise">
+              <ul class="points">
+                <li><span data-l="en">A unique link per guest, open tracking, sharing by WhatsApp and email.</span><span data-l="fr">Un lien unique par invité, suivi des ouvertures, partage par WhatsApp et e-mail.</span></li>
+                <li><span data-l="en">Plain JavaScript and GSAP, Supabase for storage and data, deployed on Vercel.</span><span data-l="fr">JavaScript natif et GSAP, Supabase pour le stockage et les données, déployé sur Vercel.</span></li>
+                <li><span data-l="en">Now growing into Envo, a self-serve version in Next.js with accounts, RSVP, payments and two languages.</span><span data-l="fr">En train de devenir Envo, une version en libre-service en Next.js avec comptes, RSVP, paiements et deux langues.</span></li>
+              </ul>
+              <div class="invite" aria-hidden="true">
+                <div class="confetti"><i style="--x:12%;--c:#D4A84B;--d:0s"></i><i style="--x:24%;--c:#2D5A27;--d:.3s"></i><i style="--x:37%;--c:#8B1A1A;--d:.1s"></i><i style="--x:49%;--c:#D4A84B;--d:.5s"></i><i style="--x:58%;--c:var(--accent);--d:.2s"></i><i style="--x:69%;--c:#2D5A27;--d:.45s"></i><i style="--x:80%;--c:#D4A84B;--d:.15s"></i><i style="--x:90%;--c:#8B1A1A;--d:.35s"></i><i style="--x:31%;--c:var(--accent);--d:.6s"></i><i style="--x:74%;--c:#8B1A1A;--d:.7s"></i></div>
+                <div class="env"><div class="back"></div><div class="card"><span>INVITATION</span><i></i><b>SOFATO</b></div><div class="front"></div><div class="flap"></div></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Grader -->
+          <article class="case" id="grader">
+            <div class="case-head">
+              <p class="label"><span data-l="en">Computer vision · OpenCV · Streamlit</span><span data-l="fr">Vision par ordinateur · OpenCV · Streamlit</span></p>
+              <h3><span data-l="en">Bubble-sheet grader</span><span data-l="fr">Correcteur de QCM</span></h3>
+              <p class="lede-2"><span data-l="en">Grades a multiple-choice answer sheet from a phone photo. It finds the grid, reads each bubble, compares it with the key and returns the score.</span><span data-l="fr">Corrige une feuille de QCM à partir d’une photo prise au téléphone. Il repère la grille, lit chaque case, la compare au corrigé et renvoie la note.</span></p>
+            </div>
+            <div class="case-body rise">
+              <div>
+                <ul class="points">
+                  <li><span data-l="en">Tested on about thirty real answer sheets.</span><span data-l="fr">Testé sur une trentaine de copies réelles.</span></li>
+                  <li><span data-l="en">Runs in the browser through a Streamlit app.</span><span data-l="fr">Fonctionne dans le navigateur via une application Streamlit.</span></li>
+                </ul>
+                <p class="links"><a href="https://github.com/Ravel226/Bubble_Sheet_Corrector" target="_blank" rel="noopener">github.com/Ravel226/Bubble_Sheet_Corrector ↗</a></p>
+              </div>
+              <figure class="figure">
+                <img src="img/omr.webp" width="728" height="632" loading="lazy" decoding="async" alt="Graded answer sheet with forty questions. Six answers circled in green, the others in red. Score 6 out of 40.">
+                <figcaption><span data-l="en">Real output. Green answers match the key, red ones do not: 6/40.</span><span data-l="fr">Sortie réelle. En vert les réponses justes, en rouge les autres&nbsp;: 6/40.</span></figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <!-- Drowsiness -->
+          <article class="case" id="drowsiness">
+            <div class="case-head">
+              <p class="label"><span data-l="en">Computer vision · YOLOv5 · real time</span><span data-l="fr">Vision par ordinateur · YOLOv5 · temps réel</span></p>
+              <h3><span data-l="en">Drowsiness detection</span><span data-l="fr">Détection de somnolence</span></h3>
+              <p class="lede-2"><span data-l="en">Watches a driver through a webcam and flags drowsiness in real time, with a YOLOv5 model trained on a dataset I collected.</span><span data-l="fr">Surveille un conducteur par webcam et signale la somnolence en temps réel, avec un modèle YOLOv5 entraîné sur un jeu de données que j’ai constitué.</span></p>
+            </div>
+            <div class="case-body rise">
+              <div>
+                <ul class="points">
+                  <li><span data-l="en">Two classes, awake and drowsy, detected frame by frame.</span><span data-l="fr">Deux classes, éveillé et somnolent, détectées image par image.</span></li>
+                  <li><span data-l="en">OpenCV capture and a Streamlit interface.</span><span data-l="fr">Capture OpenCV et interface Streamlit.</span></li>
+                </ul>
+                <p class="links"><a href="https://github.com/Ravel226/Drowsiness_Detection" target="_blank" rel="noopener">github.com/Ravel226/Drowsiness_Detection ↗</a></p>
+              </div>
+              <div class="eye-card" aria-hidden="true">
+                <svg viewBox="0 0 360 170">
+                  <rect class="det" x="70" y="30" width="220" height="110" rx="4"/>
+                  <g class="s-awake"><rect class="tag" x="70" y="8" width="78" height="22"/><text class="tagt" x="80" y="24">awake</text></g>
+                  <g class="s-drowsy"><rect class="tag" x="70" y="8" width="86" height="22"/><text class="tagt" x="80" y="24">drowsy</text></g>
+                  <path class="outline" d="M100 85 Q180 30 260 85 Q180 140 100 85 Z"/>
+                  <circle class="iris" cx="180" cy="85" r="22"/>
+                  <path class="lid" d="M98 85 Q180 26 262 85 L262 40 L98 40 Z"/>
+                  <path class="outline" d="M100 85 Q180 30 260 85"/>
+                </svg>
+                <span class="label"><span data-l="en">Illustration of the two classes</span><span data-l="fr">Illustration des deux classes</span></span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="research">
+    <div class="wrap">
+      <div class="sec-head" data-anim>
+        <h2><span data-l="en">Research</span><span data-l="fr">Recherche</span></h2>
+        <p><span data-l="en">PhD in AI for cybersecurity at UEMF, Fès, since December 2024. Expected defense: December 2027. I check every result on several random seeds and with statistical tests before I trust it.</span><span data-l="fr">Doctorat en IA pour la cybersécurité à l’UEMF, Fès, depuis décembre 2024. Soutenance prévue en décembre 2027. Je vérifie chaque résultat sur plusieurs graines aléatoires et avec des tests statistiques avant de m’y fier.</span></p>
+      </div>
+
+      <div class="lab">
+        <article class="paper rise">
+          <span class="chip"><span data-l="en">Under review · Array (Elsevier) · since 12 Sept 2026</span><span data-l="fr">En évaluation · Array (Elsevier) · depuis le 12/09/2026</span></span>
+          <h3><span data-l="en">Data augmentation for intrusion detection</span><span data-l="fr">Augmentation de données pour la détection d’intrusions</span></h3>
+          <p><span data-l="en">A benchmark of 6 augmentation methods, from SMOTE to diffusion models, with 6 classifiers on 5 intrusion detection datasets, 10 random seeds and paired statistical tests.</span><span data-l="fr">Un banc d’essai de 6 méthodes d’augmentation, de SMOTE aux modèles de diffusion, avec 6 classifieurs sur 5 jeux de données de détection d’intrusions, 10 graines aléatoires et des tests statistiques appariés.</span></p>
+          <div class="chart" data-anim>
+            <svg viewBox="0 0 420 150" role="img" aria-label="Random Forest F1 on the TON_IoT mitm class: 0.772 before SMOTE, 0.163 with SMOTE"><line class="grid" x1="110" y1="18" x2="110" y2="118"/><line class="grid" x1="180" y1="18" x2="180" y2="118"/><line class="grid" x1="250" y1="18" x2="250" y2="118"/><line class="grid" x1="320" y1="18" x2="320" y2="118"/><line class="grid" x1="390" y1="18" x2="390" y2="118"/><rect class="b1" x="110" y="32" width="216.16" height="26" rx="2"/><rect class="b2" x="110" y="78" width="45.64" height="26" rx="2"/><text x="100" y="49" text-anchor="end"><tspan data-l="en">before SMOTE</tspan><tspan data-l="fr">avant SMOTE</tspan></text><text x="100" y="95" text-anchor="end"><tspan data-l="en">with SMOTE</tspan><tspan data-l="fr">avec SMOTE</tspan></text><text class="v" x="334" y="50"><tspan data-l="en">0.772</tspan><tspan data-l="fr">0,772</tspan></text><text class="v" x="164" y="96"><tspan data-l="en">0.163</tspan><tspan data-l="fr">0,163</tspan></text><text x="110" y="136" text-anchor="middle">0</text><text x="180" y="136" text-anchor="middle"><tspan data-l="en">0.25</tspan><tspan data-l="fr">0,25</tspan></text><text x="250" y="136" text-anchor="middle"><tspan data-l="en">0.5</tspan><tspan data-l="fr">0,5</tspan></text><text x="320" y="136" text-anchor="middle"><tspan data-l="en">0.75</tspan><tspan data-l="fr">0,75</tspan></text><text x="390" y="136" text-anchor="middle">1</text></svg>
+          </div>
+          <p class="chart-cap"><span data-l="en">F1 of Random Forest on the TON_IoT mitm class. Oversampling can wreck the very class it was meant to help.</span><span data-l="fr">F1 de Random Forest sur la classe mitm de TON_IoT. Le suréchantillonnage peut détruire la classe même qu’il devait aider.</span></p>
+          <p class="links"><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7434328" target="_blank" rel="noopener"><span data-l="en">Preprint on SSRN ↗</span><span data-l="fr">Prépublication sur SSRN ↗</span></a></p>
+        </article>
+
+        <article class="paper rise">
+          <span class="chip wip"><span data-l="en">In preparation · target: ACM TALLIP</span><span data-l="fr">En préparation · revue visée&nbsp;: ACM TALLIP</span></span>
+          <h3><span data-l="en">Does religious training data leak into translation?</span><span data-l="fr">Les données religieuses fuient-elles dans la traduction&nbsp;?</span></h3>
+          <p><span data-l="en">A controlled study on French–Mooré translation. The same NLLB-200 model is fine-tuned on mixtures from 0% to 100% religious text, at two data budgets and over three seeds, then three mitigations are tested. It measures whether religious content appears when the system translates everyday sentences.</span><span data-l="fr">Une étude contrôlée sur la traduction français-mooré. Le même modèle NLLB-200 est affiné sur des mélanges de 0&nbsp;% à 100&nbsp;% de texte religieux, avec deux budgets de données et trois graines aléatoires, puis trois mesures correctives sont testées. Elle mesure si du contenu religieux apparaît quand le système traduit des phrases ordinaires.</span></p>
+          <div class="adapters">
+            <div class="cells" aria-hidden="true">
+              <i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i><i style="--i:12"></i><i style="--i:13"></i><i style="--i:14"></i><i style="--i:15"></i><i style="--i:16"></i><i style="--i:17"></i><i style="--i:18"></i><i style="--i:19"></i><i style="--i:20"></i><i style="--i:21"></i><i style="--i:22"></i><i style="--i:23"></i><i style="--i:24"></i><i style="--i:25"></i><i style="--i:26"></i><i style="--i:27"></i><i style="--i:28"></i><i style="--i:29"></i><i style="--i:30"></i><i style="--i:31"></i><i style="--i:32"></i><i style="--i:33"></i><i style="--i:34"></i><i style="--i:35"></i><i style="--i:36"></i><i style="--i:37"></i><i style="--i:38"></i><i style="--i:39"></i><i style="--i:40"></i><i style="--i:41"></i><i style="--i:42"></i><i style="--i:43"></i><i style="--i:44"></i>
+            </div>
+            <p class="label"><span data-l="en">45 LoRA adapters · 88.4 GPU hours</span><span data-l="fr">45 adaptateurs LoRA · 88,4 heures de GPU</span></p>
+            <div class="share-bar" aria-hidden="true"></div>
+            <div class="share"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
+            <p class="label"><span data-l="en">Share of religious text in training</span><span data-l="fr">Part de texte religieux à l’entraînement</span></p>
+          </div>
+          <ul class="points">
+            <li><span data-l="en">Every test sentence removed from training, by exact match or 80% overlap of word 5-grams.</span><span data-l="fr">Chaque phrase de test retirée de l’entraînement, par correspondance exacte ou recouvrement de 80&nbsp;% des 5-grammes de mots.</span></li>
+            <li><span data-l="en">chrF++ with bootstrap confidence intervals.</span><span data-l="fr">chrF++ avec intervalles de confiance par bootstrap.</span></li>
+            <li><span data-l="en">With Burkinabè co-authors.</span><span data-l="fr">Avec des co-auteurs burkinabè.</span></li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="teach">
+        <div>
+          <p class="label"><span data-l="en">Teaching · UEMF · 09–12/2025</span><span data-l="fr">Enseignement · UEMF · 09–12/2025</span></p>
+          <p><span data-l="en">Lab sessions in algorithms and C programming for first-year EIB engineering students.</span><span data-l="fr">Travaux pratiques d’algorithmique et de programmation C, première année EIB.</span></p>
+        </div>
+        <div>
+          <p class="label"><span data-l="en">Tutoring</span><span data-l="fr">Cours particuliers</span></p>
+          <p><span data-l="en">Five private students in AI and cybersecurity, mostly networking.</span><span data-l="fr">Cinq élèves en IA et en cybersécurité, surtout en réseaux.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="lab">
+    <div class="wrap">
+      <div class="sec-head" data-anim>
+        <h2><span data-l="en">Lab</span><span data-l="fr">Atelier</span></h2>
+        <p><span data-l="en">Smaller builds and experiments.</span><span data-l="fr">Projets plus courts et expériences.</span></p>
+      </div>
+      <div class="lab-grid">
+        <article>
+          <p class="label">Android · ADB · Java</p>
+          <h3><span data-l="en">A cleaner Android TV</span><span data-l="fr">Une Android TV allégée</span></h3>
+          <p><span data-l="en">Debloated a 1 GB Android 14 TV over ADB, then wrote an Apple-TV-style home launcher in Java. Every change is backed up and reversible with one script.</span><span data-l="fr">Allègement d’une TV Android 14 de 1 Go par ADB, puis écriture d’un lanceur d’accueil façon Apple TV en Java. Chaque changement est sauvegardé et réversible en un script.</span></p>
+        </article>
+        <article>
+          <p class="label">n8n · PostgreSQL · Docker</p>
+          <h3><span data-l="en">AI automation demo</span><span data-l="fr">Démo d’automatisation IA</span></h3>
+          <p><span data-l="en">A ready-to-run stack with three workflows: AI customer service, automatic content generation and a daily sales report.</span><span data-l="fr">Une pile prête à lancer avec trois workflows&nbsp;: service client par IA, génération automatique de contenu et rapport de ventes quotidien.</span></p>
+        </article>
+        <article>
+          <p class="label"><span data-l="en">Time series · NASA C-MAPSS</span><span data-l="fr">Séries temporelles · NASA C-MAPSS</span></p>
+          <h3><span data-l="en">Predictive maintenance</span><span data-l="fr">Maintenance prédictive</span></h3>
+          <p><span data-l="en">Estimating the remaining useful life of turbofan engines from their sensor data.</span><span data-l="fr">Estimation de la durée de vie restante de turboréacteurs à partir de leurs données de capteurs.</span></p>
+        </article>
+        <article>
+          <p class="label"><span data-l="en">PhD · medical IoT security</span><span data-l="fr">Doctorat · sécurité de l’IoT médical</span></p>
+          <h3>CICIoMT2024</h3>
+          <p><span data-l="en">Merging, cleaning and exploring the CICIoMT2024 attack dataset for intrusion detection experiments, with a colleague.</span><span data-l="fr">Fusion, nettoyage et exploration du jeu de données d’attaques CICIoMT2024 pour des expériences de détection d’intrusions, avec un collègue.</span></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="path">
+    <div class="wrap">
+      <div class="sec-head" data-anim>
+        <h2><span data-l="en">Path</span><span data-l="fr">Parcours</span></h2>
+        <p><span data-l="en">Most recent first.</span><span data-l="fr">Du plus récent au plus ancien.</span></p>
+      </div>
+      <div class="tl">
+        <div class="tl-col">
+          <h3 class="tl-head"><span class="tl-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg></span><span><span data-l="en">Experience</span><span data-l="fr">Expérience</span></span></h3>
+          <ol class="tl-list">
+            <li class="tl-item"><span class="tl-dot" aria-hidden="true"></span>
+              <p class="tl-title"><span data-l="en">Teaching assistant, lab sessions in algorithms and C</span><span data-l="fr">Assistant d’enseignement, TP d’algorithmique et de C</span></p>
+              <p class="tl-date">09–12/2025</p>
+              <p class="tl-desc"><span data-l="en">UEMF, Fès. Lab sessions in algorithms and C programming for first-year EIB engineering students.</span><span data-l="fr">UEMF, Fès. Travaux pratiques d’algorithmique et de programmation C, première année EIB.</span></p></li>
+            <li class="tl-item"><span class="tl-dot" aria-hidden="true"></span>
+              <p class="tl-title"><span data-l="en">AI engineer, NLP and multimodal systems</span><span data-l="fr">Ingénieur IA, TAL et systèmes multimodaux</span></p>
+              <p class="tl-date">11/2024–06/2025</p>
+              <p class="tl-desc"><span data-l="en">ByteInnovIT, Benin (remote). Translation, speech recognition and speech synthesis for Fongbé, served as one API.</span><span data-l="fr">ByteInnovIT, Bénin (télétravail). Traduction, reconnaissance et synthèse vocales pour le fongbé, servies par une seule API.</span></p></li>
+            <li class="tl-item"><span class="tl-dot" aria-hidden="true"></span>
+              <p class="tl-title"><span data-l="en">AI intern, strategic watch</span><span data-l="fr">Stagiaire IA, veille stratégique</span></p>
+              <p class="tl-date">02–07/2024</p>
+              <p class="tl-desc"><span data-l="en">Les Domaines Agricoles, Casablanca. Market, competitor and technology news collected every day, then classified and summarized with GPT-4 into watch reports.</span><span data-l="fr">Les Domaines Agricoles, Casablanca. L’actualité des marchés, des concurrents et des technologies collectée chaque jour, puis classée et résumée avec GPT-4 en rapports de veille.</span></p></li>
+          </ol>
+        </div>
+        <div class="tl-col">
+          <h3 class="tl-head"><span class="tl-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5h6a4 4 0 0 1 4 4v11a3 3 0 0 0-3-3H2z"/><path d="M22 5h-6a4 4 0 0 0-4 4v11a3 3 0 0 1 3-3h7z"/></svg></span><span><span data-l="en">Education</span><span data-l="fr">Formation</span></span></h3>
+          <ol class="tl-list">
+            <li class="tl-item now"><span class="tl-dot" aria-hidden="true"></span>
+              <p class="tl-title"><span data-l="en">PhD candidate, AI for cybersecurity</span><span data-l="fr">Doctorant, IA pour la cybersécurité</span></p>
+              <p class="tl-date">12/2024 → 12/2027<b><span data-l="en">ongoing</span><span data-l="fr">en cours</span></b></p>
+              <p class="tl-desc"><span data-l="en">UEMF, Fès. Data augmentation for intrusion detection; a paper under review at Array (Elsevier). Defense expected in December 2027.</span><span data-l="fr">UEMF, Fès. Augmentation de données pour la détection d’intrusions ; un article en évaluation chez Array (Elsevier). Soutenance prévue en décembre 2027.</span></p></li>
+            <li class="tl-item"><span class="tl-dot" aria-hidden="true"></span>
+              <p class="tl-title"><span data-l="en">State Engineer degree in Artificial Intelligence</span><span data-l="fr">Diplôme d’Ingénieur d’État en Intelligence Artificielle</span></p>
+              <p class="tl-date">2024</p>
+              <p class="tl-desc"><span data-l="en">UEMF, Fès.</span><span data-l="fr">UEMF, Fès.</span></p></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="off">
+        <div><p class="label"><span data-l="en">Off the clock</span><span data-l="fr">Hors du code</span></p><p><span data-l="en">I edit video: educational films and short formats.</span><span data-l="fr">Je fais du montage vidéo&nbsp;: films pédagogiques et formats courts.</span></p></div>
+        <div><p class="label"><span data-l="en">Since 2020</span><span data-l="fr">Depuis 2020</span></p><p><span data-l="en">League of Legends player.</span><span data-l="fr">Joueur de League of Legends.</span></p></div>
+        <div><p class="label"><span data-l="en">Languages</span><span data-l="fr">Langues</span></p><p><span data-l="en">French (native), English (professional), Spanish (intermediate).</span><span data-l="fr">Français (langue maternelle), anglais (professionnel), espagnol (intermédiaire).</span></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <p class="label"><span data-l="en">Contact</span><span data-l="fr">Contact</span></p>
+      <p class="ask" style="margin-top:18px">
+        <span data-l="en">A model that must work in <em>Mooré</em>, a pipeline that must run every night, an agent that must tell the truth?</span>
+        <span data-l="fr">Un modèle qui doit fonctionner en <em>mooré</em>, un pipeline qui doit tourner chaque nuit, un agent qui doit dire la vérité&nbsp;?</span>
+      </p>
+      <div class="mail">
+        <a class="mail-addr" id="mail" href="mailto:ravellewourougou@gmail.com">ravellewourougou@gmail.com</a>
+        <button type="button" class="copy" id="copy-mail" data-copy="ravellewourougou@gmail.com" aria-controls="mail">
+          <span class="todo"><span data-l="en">Copy</span><span data-l="fr">Copier</span></span><span class="done"><span data-l="en">Copied</span><span data-l="fr">Copié</span></span>
+        </button>
+      </div>
+      <div class="elsewhere">
+        <a href="https://linkedin.com/in/maako-wourougou" target="_blank" rel="noopener"><span class="label">LinkedIn</span><b>maako-wourougou ↗</b></a>
+        <a href="https://github.com/Ravel226" target="_blank" rel="noopener"><span class="label">GitHub</span><b>Ravel226 ↗</b></a>
+        <a href="https://www.freelancer.ma/freelancers/developpement-informatique-oVQBev" target="_blank" rel="noopener"><span class="label">Freelance</span><b>freelancer.ma/@maako ↗</b></a>
+        <div><span class="label"><span data-l="en">Academic</span><span data-l="fr">Académique</span></span><b>m.wourougou@ueuromed.org</b></div>
+      </div>
+      <div class="weave" aria-hidden="true" title="Faso Dan Fani"></div>
+      <footer class="foot">
+        <span>© 2026 Maako Ravelle WOUROUGOU</span>
+        <span><span data-l="en">One HTML file, no framework.</span><span data-l="fr">Un seul fichier HTML, sans framework.</span></span>
+        <a href="#top"><span data-l="en">Back to top ↑</span><span data-l="fr">Haut de page ↑</span></a>
+      </footer>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var reduce = !window.__motionOK();
+
+  /* Language */
+  function greet() {
+    var h = new Date().getHours();
+    var g = h >= 5 && h < 12 ? 0 : h >= 12 && h < 18 ? 1 : 2;
+    document.getElementById("g-src").textContent = ["Ne y yibeoogo", "Ne y windga", "Ne y zaabre"][g];
+    document.getElementById("g-en").textContent = ["Good morning", "Good afternoon", "Good evening"][g];
+    document.getElementById("g-fr").textContent = ["Bonjour", "Bon après-midi", "Bonsoir"][g];
+  }
+  function setLang(l) {
+    root.setAttribute("data-lang", l);
+    root.lang = l;
+    try { localStorage.setItem("mrw-lang", l); } catch (e) {}
+    document.querySelectorAll("[data-setlang]").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-setlang") === l));
+    });
+  }
+  document.querySelectorAll("[data-setlang]").forEach(function (b) {
+    b.addEventListener("click", function () { setLang(b.getAttribute("data-setlang")); });
+  });
+  setLang(root.getAttribute("data-lang") === "fr" ? "fr" : "en");
+  greet();
+
+  /* Header border on scroll */
+  var head = document.querySelector(".head");
+  function onScroll() { head.classList.toggle("scrolled", window.scrollY > 8); }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* Hero waveform: speech-like bursts drift left; the cursor raises the signal near it */
+  var cv = document.getElementById("wave");
+  var ctx = cv.getContext("2d");
+  var W = 0, H = 0, dpr = 1, color = "#058a8a", frame = 0, running = false, raf = 0;
+  var px = -9999, pAmp = 0, pTarget = 0;
+  var seeds = [];
+  for (var s = 0; s < 600; s++) seeds.push(Math.random());
+  var bursts = [];
+  for (var b = 0; b < 9; b++) bursts.push({ x: Math.random(), w: 0.02 + Math.random() * 0.05, a: 0.35 + Math.random() * 0.65, v: 0.00025 + Math.random() * 0.00035 });
+  function readColor() { color = getComputedStyle(root).getPropertyValue("--accent").trim() || color; }
+  function size() {
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function draw(t) {
+    ctx.clearRect(0, 0, W, H);
+    var step = W < 600 ? 6 : 7, bw = W < 600 ? 2.5 : 3, cy = H * 0.44, n = Math.ceil(W / step);
+    pAmp += (pTarget - pAmp) * 0.08;
+    ctx.fillStyle = color;
+    for (var i = 0; i < n; i++) {
+      var x = i * step, u = x / W, e = 0.035;
+      for (var k = 0; k < bursts.length; k++) {
+        var bb = bursts[k], c = ((bb.x - t * bb.v) % 1 + 1) % 1, d = Math.min(Math.abs(u - c), 1 - Math.abs(u - c));
+        e += bb.a * Math.exp(-(d * d) / (2 * bb.w * bb.w));
+      }
+      var dx = (x - px) / 90;
+      e += pAmp * 1.1 * Math.exp(-dx * dx);
+      e = Math.min(e, 1.25);
+      var jitter = 0.72 + 0.28 * Math.sin(t * 0.004 + seeds[i % 600] * 40);
+      var h = Math.max(2, e * jitter * H * 0.62);
+      ctx.globalAlpha = 0.25 + Math.min(0.75, e * 0.6);
+      ctx.fillRect(x, cy - h / 2, bw, h);
+    }
+    ctx.globalAlpha = 1;
+  }
+  function loop(t) {
+    if (!running) return;
+    if (frame++ % 120 === 0) readColor();
+    draw(t);
+    raf = requestAnimationFrame(loop);
+  }
+  size(); readColor(); draw(0);
+  window.addEventListener("resize", function () { size(); draw(performance.now()); });
+  if (!reduce) {
+    var band = document.querySelector(".wave-band");
+    band.addEventListener("pointermove", function (e) { var r = cv.getBoundingClientRect(); px = e.clientX - r.left; pTarget = 1; });
+    band.addEventListener("pointerleave", function () { pTarget = 0; });
+    new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        if (en.isIntersecting && !running) { running = true; raf = requestAnimationFrame(loop); }
+        else if (!en.isIntersecting && running) { running = false; cancelAnimationFrame(raf); }
+      });
+    }).observe(cv);
+  }
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () { readColor(); draw(performance.now()); });
+
+  /* Terminal replay: the transcript is complete at rest and replays once it scrolls into view */
+  var term = document.getElementById("term");
+  var lines = Array.prototype.slice.call(term.querySelectorAll(".tl"));
+  var timers = [];
+  function play() {
+    timers.forEach(clearTimeout); timers = [];
+    lines.forEach(function (l) { l.classList.add("off"); });
+    var t = 250;
+    lines.forEach(function (l) {
+      t += +(l.getAttribute("data-d") || 70);
+      if (l.hasAttribute("data-type")) {
+        var ty = l.querySelector(".ty");
+        var full = ty.getAttribute("data-full") || ty.textContent;
+        ty.setAttribute("data-full", full);
+        ty.textContent = "";
+        timers.push(setTimeout(function () { l.classList.remove("off"); }, t));
+        for (var i = 1; i <= full.length; i++) {
+          (function (j) { timers.push(setTimeout(function () { ty.textContent = full.slice(0, j); }, t + j * 26)); })(i);
+        }
+        t += full.length * 26 + 200;
+      } else {
+        timers.push(setTimeout(function () { l.classList.remove("off"); }, t));
+      }
+    });
+  }
+  document.getElementById("replay").addEventListener("click", play);
+  if (!reduce) {
+    var seen = false;
+    new IntersectionObserver(function (es, ob) {
+      es.forEach(function (en) { if (en.isIntersecting && !seen) { seen = true; play(); ob.disconnect(); } });
+    }, { threshold: 0.4 }).observe(term);
+  }
+
+  /* Index highlights the case file in view */
+  var links = Array.prototype.slice.call(document.querySelectorAll(".idx a"));
+  var spy = new IntersectionObserver(function (es) {
+    es.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      links.forEach(function (a) {
+        if (a.getAttribute("href") === "#" + en.target.id) a.setAttribute("aria-current", "true");
+        else a.removeAttribute("aria-current");
+      });
+    });
+  }, { rootMargin: "-40% 0px -55% 0px" });
+  document.querySelectorAll(".case").forEach(function (c) { spy.observe(c); });
+
+  /* Copy the email address */
+  document.querySelectorAll("[data-copy]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var v = btn.getAttribute("data-copy");
+      function done() { btn.classList.add("ok"); setTimeout(function () { btn.classList.remove("ok"); }, 1600); }
+      function select() {
+        var el = document.getElementById(btn.getAttribute("aria-controls"));
+        var r = document.createRange(); r.selectNodeContents(el);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(v).then(done, select);
+      } else { select(); }
+    });
+  });
+
+  /* v2: blocks below the fold wait for the viewport, everything else is shown at rest */
+  if (!reduce && "IntersectionObserver" in window) {
+    var armIO = new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        en.target.classList.add("in");
+        armIO.unobserve(en.target);
+        if (en.target._onIn) en.target._onIn();
+      });
+    }, { threshold: 0.25 });
+    document.querySelectorAll("[data-anim]").forEach(function (el) {
+      if (el.getBoundingClientRect().top > window.innerHeight * 0.9) { el.classList.add("arm"); armIO.observe(el); }
+    });
+  }
+
+  /* v2: latency counts up when it arrives */
+  document.querySelectorAll("[data-count]").forEach(function (el) {
+    var host = el.closest("[data-anim]");
+    if (!host || !host.classList.contains("arm")) return;
+    var to = +el.getAttribute("data-count"), pre = el.getAttribute("data-pre") || "", suf = el.getAttribute("data-suf") || "";
+    el.textContent = pre + "0" + suf;
+    host._onIn = function () {
+      var t0 = performance.now();
+      (function step(t) {
+        var k = Math.min(1, (t - t0) / 1300), e = 1 - Math.pow(1 - k, 3);
+        el.textContent = pre + Math.round(to * e) + suf;
+        if (k < 1) requestAnimationFrame(step);
+      })(t0);
+    };
+  });
+
+  /* v2: reading aloud, sentence and word follow the voice */
+  var reader = document.getElementById("reader");
+  if (reader) {
+    reader.querySelectorAll(".s").forEach(function (s) {
+      var frag = document.createDocumentFragment();
+      Array.prototype.slice.call(s.childNodes).forEach(function (n) {
+        if (n.nodeType !== 3) { frag.appendChild(n); return; }
+        n.textContent.split(/(\s+)/).forEach(function (part) {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          var w = document.createElement("span"); w.className = "w"; w.textContent = part; frag.appendChild(w);
+        });
+      });
+      s.textContent = ""; s.appendChild(frag);
+    });
+    var rIdx = 0, rTimer = 0, rOn = false, bar = reader.querySelector(".track b");
+    function rWords() { return reader.querySelectorAll('.reader-text[data-l="' + (root.getAttribute("data-lang") || "en") + '"] .w'); }
+    function rShow(i) {
+      reader.querySelectorAll(".on").forEach(function (x) { x.classList.remove("on"); });
+      var ws = rWords(); if (!ws.length) return 0;
+      var w = ws[i % ws.length]; w.classList.add("on"); w.closest(".s").classList.add("on");
+      bar.style.width = ((i % ws.length) + 1) / ws.length * 100 + "%";
+      return ws.length;
+    }
+    function rStep() {
+      if (!rOn) return;
+      var n = rShow(rIdx), w = rWords()[rIdx % n];
+      rIdx = (rIdx + 1) % n;
+      rTimer = setTimeout(rStep, rIdx === 0 ? 1500 : 170 + w.textContent.length * 22);
+    }
+    if (reduce) { rShow(3); }
+    else {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (en) {
+          if (en.isIntersecting && !rOn) { rOn = true; rStep(); }
+          else if (!en.isIntersecting && rOn) { rOn = false; clearTimeout(rTimer); }
+        });
+      }, { threshold: 0.3 }).observe(reader);
+    }
+  }
+
+  /* v2: OSINT globe, a rotating point sphere with satellites and earthquakes */
+  var gc = document.getElementById("globe");
+  if (gc) {
+    var gx = gc.getContext("2d"), GW = 0, GH = 0, gpr = 1, gRun = false, gRaf = 0, pts = [], N = 720;
+    for (var gi = 0; gi < N; gi++) { var gy = 1 - (gi / (N - 1)) * 2, gr = Math.sqrt(1 - gy * gy), th = gi * 2.399963; pts.push([Math.cos(th) * gr, gy, Math.sin(th) * gr]); }
+    var quakes = [41, 133, 260, 377, 512, 640].map(function (i) { return pts[i]; });
+    var sats = [{ inc: 0.5, sp: 0.00055, ph: 0 }, { inc: -1.0, sp: 0.0004, ph: 2.1 }, { inc: 1.3, sp: 0.0007, ph: 4.2 }];
+    var gcol = {};
+    function gColors() { var cs = getComputedStyle(root); ["--term-fg", "--term-dim", "--term-acc", "--term-warn"].forEach(function (k) { gcol[k] = cs.getPropertyValue(k).trim(); }); }
+    function gSize() { gpr = Math.min(2, window.devicePixelRatio || 1); GW = gc.clientWidth; GH = gc.clientHeight; gc.width = Math.round(GW * gpr); gc.height = Math.round(GH * gpr); gx.setTransform(gpr, 0, 0, gpr, 0, 0); }
+    function gDraw(t) {
+      gx.clearRect(0, 0, GW, GH);
+      var R = Math.min(GW, GH) * 0.36, cx = GW / 2, cy = GH * 0.46, a = t * 0.00011, ca = Math.cos(a), sa = Math.sin(a), ct = Math.cos(0.38), st = Math.sin(0.38);
+      function proj(p) { var x = p[0] * ca + p[2] * sa, z = -p[0] * sa + p[2] * ca, y2 = p[1] * ct - z * st, z2 = p[1] * st + z * ct; return [cx + x * R, cy + y2 * R, z2]; }
+      gx.globalAlpha = 0.25; gx.strokeStyle = gcol["--term-acc"]; gx.lineWidth = 1; gx.beginPath(); gx.arc(cx, cy, R, 0, Math.PI * 2); gx.stroke();
+      for (var i = 0; i < N; i++) {
+        var q = proj(pts[i]);
+        gx.globalAlpha = q[2] > 0 ? 0.25 + q[2] * 0.6 : 0.12;
+        gx.fillStyle = q[2] > 0 ? gcol["--term-fg"] : gcol["--term-dim"];
+        gx.fillRect(q[0] - 0.9, q[1] - 0.9, 1.8, 1.8);
+      }
+      quakes.forEach(function (p, k) {
+        var q = proj(p); if (q[2] <= 0) return;
+        var f = (t / 1600 + k * 0.37) % 1;
+        gx.globalAlpha = 1 - f; gx.strokeStyle = gcol["--term-warn"]; gx.beginPath(); gx.arc(q[0], q[1], 2 + f * 12, 0, Math.PI * 2); gx.stroke();
+        gx.globalAlpha = 0.95; gx.fillStyle = gcol["--term-warn"]; gx.beginPath(); gx.arc(q[0], q[1], 2.2, 0, Math.PI * 2); gx.fill();
+      });
+      sats.forEach(function (s) {
+        for (var k = 14; k >= 0; k--) {
+          var an = s.ph + (t - k * 60) * s.sp, p = [Math.cos(an) * 1.22, Math.sin(an) * Math.sin(s.inc) * 1.22, Math.sin(an) * Math.cos(s.inc) * 1.22], q = proj(p);
+          gx.globalAlpha = (q[2] > -0.2 ? 1 : 0.35) * (1 - k / 15);
+          gx.fillStyle = gcol["--term-acc"]; gx.beginPath(); gx.arc(q[0], q[1], k === 0 ? 3 : 1.4, 0, Math.PI * 2); gx.fill();
+        }
+      });
+      gx.globalAlpha = 1;
+    }
+    function gLoop(t) { if (!gRun) return; gDraw(t); gRaf = requestAnimationFrame(gLoop); }
+    gColors(); gSize(); gDraw(0);
+    window.addEventListener("resize", function () { gSize(); gDraw(performance.now()); });
+    if (!reduce) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (en) {
+          if (en.isIntersecting && !gRun) { gRun = true; gRaf = requestAnimationFrame(gLoop); }
+          else if (!en.isIntersecting && gRun) { gRun = false; cancelAnimationFrame(gRaf); }
+        });
+      }).observe(gc);
+    }
+  }
+
+  /* v2: cursor, magnetic buttons and scrambled links, only with a mouse */
+  if (!reduce && window.matchMedia("(pointer: fine)").matches) {
+    var cur = document.createElement("div"); cur.className = "cursor"; cur.setAttribute("aria-hidden", "true"); document.body.appendChild(cur);
+    var tx = -100, ty = -100, kx = -100, ky = -100;
+    window.addEventListener("pointermove", function (e) { tx = e.clientX; ty = e.clientY; cur.classList.add("on"); }, { passive: true });
+    document.addEventListener("pointerover", function (e) { cur.classList.toggle("hov", !!e.target.closest("a, button, .portrait")); });
+    document.documentElement.addEventListener("pointerleave", function () { cur.classList.remove("on"); });
+    (function follow() { kx += (tx - kx) * 0.22; ky += (ty - ky) * 0.22; cur.style.transform = "translate(" + kx + "px," + ky + "px)"; requestAnimationFrame(follow); })();
+    document.querySelectorAll(".btn, .copy").forEach(function (b) {
+      b.addEventListener("pointermove", function (e) { var r = b.getBoundingClientRect(); b.style.transform = "translate(" + ((e.clientX - r.left - r.width / 2) * 0.22) + "px," + ((e.clientY - r.top - r.height / 2) * 0.32) + "px)"; });
+      b.addEventListener("pointerleave", function () { b.style.transform = ""; });
+    });
+    var glyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    document.querySelectorAll(".nav a, .idx a").forEach(function (a) {
+      a.addEventListener("pointerenter", function () {
+        var leaves = Array.prototype.filter.call(a.querySelectorAll("span"), function (s) { return !s.children.length && s.offsetParent !== null; });
+        if (!leaves.length && !a.children.length) leaves = [a];
+        leaves.forEach(function (s) {
+          var orig = s.getAttribute("data-o") || s.textContent, f = 0;
+          s.setAttribute("data-o", orig); clearInterval(s._sc);
+          s._sc = setInterval(function () {
+            f++;
+            s.textContent = orig.split("").map(function (c, i) { return i < f / 2 || c === " " ? c : glyphs[Math.floor(Math.random() * glyphs.length)]; }).join("");
+            if (f / 2 >= orig.length) { clearInterval(s._sc); s.textContent = orig; }
+          }, 26);
+        });
+      });
+    });
+  }
+
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
+<script>
+/* v4 motion layer (GSAP 3.13, ScrollTrigger, SplitText).
+   Thesis: the page is a voice being decoded. Once per session a waveform speaks and lifts like a curtain; the
+   name resolves through the scripts of low-resource languages (Mooré letters, Arabic, Tifinagh, Greek, Cyrillic)
+   before it settles; the letters gain weight under the pointer like amplitude; the Mooré greeting is typed and
+   translated live; leaving the hero, the name comes apart. Below: titles surface behind masks, case files open,
+   the path is traced through time, the lab is a terminal screen that widens.
+   Rules: content visible without this script; nothing moves under prefers-reduced-motion; transform, opacity,
+   clip-path and CSS variables only; ScrollTriggers on top-level animations only. */
+document.addEventListener("DOMContentLoaded", function () {
+  var g = window.gsap, ST = window.ScrollTrigger, root = document.documentElement;
+  var intro = document.querySelector(".intro");
+  function dropIntro() { root.classList.remove("intro-on"); if (intro) intro.remove(); intro = null; }
+  if (!g || !ST) { dropIntro(); return; }
+  g.registerPlugin(ST);
+  if (window.SplitText) g.registerPlugin(window.SplitText);
+
+  var MOS = ["Ne y yibeoogo", "Ne y windga", "Ne y zaabre"];
+  var EN = ["Good morning", "Good afternoon", "Good evening"];
+  var FR = ["Bonjour", "Bon après-midi", "Bonsoir"];
+  var GLYPHS = "ɛɔŋɩʋƐƆŊابتجدرسعΣΔΛΨΩЖЯФⵣⵎⵓ";
+  /* The name keeps its case and roughly its width while it decodes: Mooré letters, Greek, Cyrillic, Tifinagh. */
+  var LOW = "ɛɔŋɩʋɲƴλδψжяⵓ", UP = "ƐƆŊƝƳΣΔΛΨЖЯⵣⵎ";
+  var pick = function (s) { return s.charAt(Math.floor(Math.random() * s.length)); };
+  var seeded = function (i, k) { var x = Math.sin(i * 12.9898 + k * 78.233) * 43758.5453; return x - Math.floor(x); };
+
+  g.matchMedia().add({
+    /* "all" keeps the callback alive on touch phones, where no other condition matches */
+    always: "all",
+    reduce: "(prefers-reduced-motion: reduce)",
+    fine: "(hover: hover) and (pointer: fine)",
+    wide: "(min-width: 901px)"
+  }, function (ctx) {
+    var c = ctx.conditions, undo = [];
+    if (!window.__motionOK()) { dropIntro(); return; }
+    var playIntro = !!intro && root.classList.contains("intro-on") && performance.now() < 1700 && window.scrollY < 40;
+    if (!playIntro) dropIntro();
+    root.classList.add("gs");
+    var below = function (el) { return el.getBoundingClientRect().top > window.innerHeight * 0.92; };
+    var chars = g.utils.toArray(".name .ch");
+
+    /* The name resolves through other scripts before it settles. */
+    function decode(tl, at, dur) {
+      chars.forEach(function (ch, i) {
+        var fin = ch.getAttribute("data-c") || ch.textContent, o = { p: 0 }, last = -1;
+        var set = fin === fin.toLowerCase() ? LOW : UP;
+        ch.setAttribute("data-c", fin);
+        /* every letter is scrambled from the start, so none shows its final form before its turn */
+        ch.style.width = ch.getBoundingClientRect().width + "px";
+        ch.style.textAlign = "center";
+        ch.textContent = pick(set);
+        tl.to(o, { p: 1, duration: dur, ease: "none",
+          onUpdate: function () { var f = Math.floor(o.p * 8); if (f !== last) { last = f; ch.textContent = o.p < 1 ? pick(set) : fin; } },
+          onComplete: function () { ch.textContent = fin; ch.style.width = ""; ch.style.textAlign = ""; }
+        }, at + i * 0.036);
+      });
+    }
+
+    /* 1. Hero entrance. */
+    var startTyping = function () {};
+    if (playIntro) {
+      root.classList.add("hero-gsap", "hero-done");
+      try { sessionStorage.setItem("mrw-intro", "1"); } catch (e) { /* storage blocked: the intro may replay */ }
+      var bars = g.utils.toArray(".intro-bars i");
+      var rest = g.utils.toArray(".hero-top > *, .hero .lede, .hero .facts-hero li, .hero .cta > *");
+      g.set(chars, { yPercent: 118, skewY: 9 });
+      g.set(".portrait .frame", { clipPath: "inset(100% 0% 0% 0%)" });
+      g.set(".portrait img", { scale: 1.3 });
+      g.set(rest, { autoAlpha: 0, y: 26 });
+      var tl = g.timeline({ defaults: { ease: "power3.out" }, onComplete: dropIntro });
+      tl.to(bars, { autoAlpha: 1, duration: 0.25, stagger: { each: 0.01, from: "center" } }, 0)
+        .to(bars, { scaleY: function (i) { return 0.12 + seeded(i, 1) * 0.88; }, duration: 0.24, ease: "sine.inOut",
+          stagger: { each: 0.007, from: "center", yoyo: true, repeat: 3 } }, 0.2)
+        .to(bars, { scaleY: 0.03, duration: 0.18, ease: "power2.in" }, ">")
+        .to(intro, { clipPath: "inset(0% 0% 100% 0%)", duration: 0.8, ease: "expo.inOut" }, ">-0.02")
+        .addLabel("name", "<0.28")
+        .to(chars, { yPercent: 0, skewY: 0, duration: 1.05, ease: "expo.out", stagger: 0.036 }, "name")
+        .to(".portrait .frame", { clipPath: "inset(0% 0% 0% 0%)", duration: 1.25, ease: "expo.out" }, "name+=0.3")
+        .to(".portrait img", { scale: 1.04, duration: 1.9, ease: "expo.out" }, "<")
+        .to(rest, { autoAlpha: 1, y: 0, duration: 0.85, stagger: 0.055 }, "name+=0.45")
+        .fromTo(".name .l2", { textShadow: "7px 0 0 rgba(240,163,94,.6), -7px 0 0 rgba(60,199,192,.6)" },
+          { textShadow: "0px 0 0 rgba(240,163,94,0), 0px 0 0 rgba(60,199,192,0)", duration: 1.1, ease: "power2.out" }, "name+=0.5")
+        .call(function () { startTyping(); }, null, "name+=0.9");
+      decode(tl, tl.labels.name, 0.5);
+    } else {
+      var tl0 = g.timeline();
+      decode(tl0, 0.04, 0.45);   /* runs with the CSS rise already playing */
+      g.delayedCall(0.9, function () { startTyping(); });
+      g.delayedCall(1.9, function () { root.classList.add("hero-done"); ST.refresh(); });
+    }
+
+    /* 2. The letters gain weight under the pointer, like amplitude. */
+    if (c.fine && chars.length) {
+      var hero = document.querySelector(".hero");
+      var W = chars.map(function (ch) {
+        var heavy = !!ch.closest(".l2");
+        g.set(ch, { "--w": heavy ? 800 : 300 });
+        return { el: ch, base: heavy ? 800 : 300, to: heavy ? 280 : 780, q: g.quickTo(ch, "--w", { duration: 0.55, ease: "power3" }) };
+      });
+      var px = 0, py = 0, raf = 0;
+      var frame = function () {
+        raf = 0;
+        W.forEach(function (o) {
+          var r = o.el.getBoundingClientRect();
+          var f = Math.max(0, 1 - Math.hypot(px - (r.left + r.width / 2), py - (r.top + r.height / 2)) / 300);
+          o.q(o.base + (o.to - o.base) * f * f);
+        });
+      };
+      var move = function (e) { px = e.clientX; py = e.clientY; if (!raf) raf = requestAnimationFrame(frame); };
+      var leave = function () { W.forEach(function (o) { o.q(o.base); }); };
+      hero.addEventListener("pointermove", move);
+      hero.addEventListener("pointerleave", leave);
+      undo.push(function () { hero.removeEventListener("pointermove", move); hero.removeEventListener("pointerleave", leave); });
+    }
+
+    /* 3. Leaving the hero, the name comes apart; the portrait rises; the waveform fades. */
+    if (c.wide && chars.length) {
+      g.timeline({ scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.7 } })
+        .to(chars, {
+          y: function (i) { return -50 - seeded(i, 2) * 170; },
+          xPercent: function (i) { return (seeded(i, 3) - 0.5) * 90; },
+          rotate: function (i) { return (seeded(i, 4) - 0.5) * 56; },
+          autoAlpha: 0.12, ease: "none"
+        }, 0)
+        .to(".portrait .frame", { y: -90, ease: "none" }, 0)
+        .to(".wave-band", { autoAlpha: 0.15, ease: "none" }, 0);
+    }
+
+    /* 4. The greeting is typed in Mooré, then translated: the target text resolves out of other scripts.
+          Click it for the next greeting of the day (easter egg). */
+    var greet = document.querySelector(".greet");
+    if (greet && document.getElementById("g-src")) {
+      var saved = greet.innerHTML, savedLabel = greet.getAttribute("aria-label");
+      var idx = Math.max(0, MOS.indexOf(document.getElementById("g-src").textContent.trim()));
+      var want = idx, alive = true, paused = false, JUMP = {};
+      greet.innerHTML = '<span class="tag" aria-hidden="true">mos</span><b class="src" aria-hidden="true"></b>' +
+        '<span class="g-arrow" aria-hidden="true">&rarr;</span><span class="tag tgt" aria-hidden="true">fr</span>' +
+        '<b class="out" aria-hidden="true"></b><span class="caret" aria-hidden="true"></span>';
+      greet.classList.add("typed");
+      var label = function () { greet.setAttribute("aria-label", MOS[idx] + " (mooré) : " + EN[idx] + " / " + FR[idx]); };
+      label();
+      var tags = greet.querySelectorAll(".tag"), src = greet.querySelector(".src"), out = greet.querySelector(".out"),
+          caret = greet.querySelector(".caret"), arrow = greet.querySelector(".g-arrow");
+      var io = new IntersectionObserver(function (es) { paused = !es[0].isIntersecting; });
+      io.observe(greet);
+      var sleep = function (ms) {
+        return new Promise(function (res, rej) {
+          var left = ms;
+          (function tick() {
+            if (!alive) return;
+            if (want !== idx) return rej(JUMP);
+            if (paused || document.hidden) return setTimeout(tick, 200);
+            if (left <= 0) return res();
+            var step = Math.min(left, 40); left -= step; setTimeout(tick, step);
+          })();
+        });
+      };
+      var at = function (el, typing) { el.after(caret); caret.classList.toggle("typing", typing); };
+      var type = async function (el, text, typo) {
+        at(el, true);
+        for (var i = 0; i < text.length; i++) {
+          if (typo && i === text.length - 3) { el.textContent += pick("aeiou"); await sleep(170); el.textContent = el.textContent.slice(0, -1); await sleep(120); }
+          el.textContent += text.charAt(i);
+          await sleep(text.charAt(i) === " " ? 150 : 50 + Math.random() * 80);
+        }
+        at(el, false);
+      };
+      var erase = async function (el) {
+        at(el, true);
+        while (el.textContent.length) { el.textContent = el.textContent.slice(0, -1); await sleep(26); }
+        at(el, false);
+      };
+      var translate = async function (el, text) {
+        at(el, true);
+        var n = text.length, frames = 14 + n * 2;
+        for (var f = 0; f <= frames; f++) {
+          var locked = Math.floor((f / frames) * n), s = text.slice(0, locked);
+          for (var k = locked; k < n; k++) s += text.charAt(k) === " " ? " " : pick(GLYPHS);
+          el.textContent = s;
+          await sleep(34);
+        }
+        el.textContent = text;
+        at(el, false);
+      };
+      var run = async function () {
+        var first = true;
+        for (;;) {
+          try {
+            if (!src.textContent) { await type(src, MOS[idx], first); first = false; }
+            var langs = (root.getAttribute("data-lang") || "en") === "fr" ? ["fr", "en"] : ["en", "fr"];
+            for (var j = 0; j < 2; j++) {
+              var l = langs[j];
+              tags[1].textContent = l;
+              tags[1].classList.add("hot");
+              g.fromTo(arrow, { x: -4 }, { x: 0, duration: 0.5, ease: "elastic.out(1, 0.4)" });
+              await translate(out, (l === "fr" ? FR : EN)[idx]);
+              tags[1].classList.remove("hot");
+              await sleep(2600);
+              await erase(out);
+              await sleep(280);
+            }
+          } catch (e) {
+            if (e !== JUMP) throw e;
+            caret.classList.remove("typing");
+            tags[1].classList.remove("hot");
+            out.textContent = "";
+            src.textContent = "";
+            idx = want;
+            label();
+          }
+          if (!alive) return;
+        }
+      };
+      var next = function () { want = (want + 1) % MOS.length; };
+      greet.addEventListener("click", next);
+      startTyping = function () { if (alive) run(); };
+      undo.push(function () {
+        alive = false; io.disconnect(); greet.removeEventListener("click", next);
+        greet.classList.remove("typed"); greet.innerHTML = saved;
+        if (savedLabel) greet.setAttribute("aria-label", savedLabel); else greet.removeAttribute("aria-label");
+      });
+    }
+
+    /* 5. Section titles surface from behind a mask, then their line of context. */
+    g.utils.toArray(".sec-head").forEach(function (head) {
+      head.classList.remove("arm");
+      var h2 = head.querySelector("h2"), p = head.querySelector("p");
+      if (!h2) return;
+      var inner = h2.querySelector(".h-in");
+      if (!inner) {
+        inner = document.createElement("span");
+        inner.className = "h-in";
+        while (h2.firstChild) inner.appendChild(h2.firstChild);
+        h2.appendChild(inner);
+      }
+      if (!below(head)) return;
+      var t = g.timeline({ scrollTrigger: { trigger: head, start: "top 86%", once: true } })
+        .from(inner, { yPercent: 115, rotate: 2.5, duration: 1.05, ease: "expo.out" });
+      if (p) t.from(p, { autoAlpha: 0, y: 18, duration: 0.7, ease: "power2.out" }, 0.22);
+    });
+
+    /* 6. Case files, papers and lab notes open like documents as they arrive. */
+    var docs = g.utils.toArray(".case-body, .duo, .paper, .lab-grid article").filter(below);
+    g.set(docs, { clipPath: "inset(16% 0% 0% 0% round 14px)", y: 56, autoAlpha: 0 });
+    ST.batch(docs, { start: "top 90%", once: true, onEnter: function (els) {
+      g.to(els, { clipPath: "inset(0% 0% 0% 0% round 0px)", y: 0, autoAlpha: 1, duration: 1.05,
+        ease: "power3.out", stagger: 0.09, overwrite: true, clearProps: "clipPath,transform" });
+    } });
+
+    /* 7. The path is traced through time: the rail draws as you scroll, each dot lights when the rail reaches it. */
+    g.utils.toArray(".tl-list").forEach(function (list) {
+      var rail = document.createElement("span");
+      rail.className = "tl-rail";
+      rail.setAttribute("aria-hidden", "true");
+      list.prepend(rail);
+      undo.push(function () { rail.remove(); });
+      g.to(rail, { scaleY: 1, ease: "none", scrollTrigger: { trigger: list, start: "top 70%", end: "bottom 70%", scrub: 0.4 } });
+      list.querySelectorAll(".tl-item").forEach(function (item) {
+        ST.create({ trigger: item.querySelector(".tl-dot"), start: "top 70%",
+          onEnter: function () { item.classList.add("lit"); }, onLeaveBack: function () { item.classList.remove("lit"); } });
+        undo.push(function () { item.classList.remove("lit"); });
+      });
+    });
+    var steps = g.utils.toArray(".tl-head, .tl-item").filter(below);
+    g.set(steps, { x: -26, autoAlpha: 0 });
+    ST.batch(steps, { start: "top 88%", once: true, onEnter: function (els) {
+      g.to(els, { x: 0, autoAlpha: 1, duration: 0.8, ease: "power3.out", stagger: 0.08, overwrite: true });
+    } });
+
+    /* 8. The lab: a terminal screen widens to full bleed while it comes into view. */
+    var lab = document.getElementById("lab");
+    if (lab) {
+      g.fromTo(lab, { "--lab-x": c.wide ? "5vw" : "3vw", "--lab-r": "28px" },
+        { "--lab-x": "0vw", "--lab-r": "0px", ease: "none",
+          scrollTrigger: { trigger: lab, start: "top 96%", end: "top 30%", scrub: 0.6 } });
+    }
+
+    /* 9. Contact: the question is said word by word. */
+    if (window.SplitText) {
+      var ask = document.querySelector(".contact .ask");
+      if (ask && below(ask)) {
+        var words = [];
+        ask.querySelectorAll(":scope > span").forEach(function (s) {
+          words = words.concat(window.SplitText.create(s, { type: "words", mask: "words", aria: "auto" }).words);
+        });
+        g.from(words, { yPercent: 115, duration: 0.9, ease: "expo.out", stagger: 0.03,
+          scrollTrigger: { trigger: ask, start: "top 86%", once: true } });
+      }
+    }
+
+    /* 10. Magnetic controls on fine pointers. */
+    if (c.fine) {
+      g.utils.toArray(".btn, .copy, .mail-addr, .elsewhere a").forEach(function (el) {
+        var xTo = g.quickTo(el, "x", { duration: 0.45, ease: "power3" }), yTo = g.quickTo(el, "y", { duration: 0.45, ease: "power3" });
+        var box = null, k = el.classList.contains("mail-addr") ? 0.12 : 0.26;
+        var enter = function () { var r = el.getBoundingClientRect(); box = { x: r.left + r.width / 2 - g.getProperty(el, "x"), y: r.top + r.height / 2 - g.getProperty(el, "y") }; };
+        var move = function (e) { if (!box) enter(); xTo((e.clientX - box.x) * k); yTo((e.clientY - box.y) * k * 1.3); };
+        var leave = function () { box = null; g.to(el, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.45)", overwrite: true }); };
+        el.addEventListener("pointerenter", enter); el.addEventListener("pointermove", move); el.addEventListener("pointerleave", leave);
+        undo.push(function () { el.removeEventListener("pointerenter", enter); el.removeEventListener("pointermove", move); el.removeEventListener("pointerleave", leave); });
+      });
+    }
+
+    /* 11. Reading progress where CSS scroll timelines are missing (Firefox, Safari). */
+    if (!(window.CSS && CSS.supports("animation-timeline: scroll()"))) {
+      g.fromTo(".progress", { scaleX: 0 }, { scaleX: 1, ease: "none", scrollTrigger: { start: 0, end: "max", scrub: 0.3 } });
+    }
+
+    /* Easter egg: type "wourougou" anywhere and the name decodes again. */
+    var buf = "";
+    var keys = function (e) {
+      if (e.key.length !== 1 || /input|textarea/i.test((e.target && e.target.tagName) || "")) return;
+      buf = (buf + e.key.toLowerCase()).slice(-9);
+      if (buf === "wourougou") { buf = ""; decode(g.timeline(), 0, 0.7); }
+    };
+    window.addEventListener("keydown", keys);
+    undo.push(function () { window.removeEventListener("keydown", keys); });
+
+    return function () { root.classList.remove("gs"); undo.forEach(function (f) { f(); }); };
+  });
+
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ST.refresh(); });
+  document.querySelectorAll("[data-setlang]").forEach(function (b) {
+    b.addEventListener("click", function () { requestAnimationFrame(function () { ST.refresh(); }); });
+  });
+});
+</script>
+<script>
+(function () {
+  var b = document.getElementById("motion-tg");
+  if (!b) return;
+  var on = window.__motionOK();
+  b.setAttribute("aria-pressed", String(on));
+  b.addEventListener("click", function () {
+    try {
+      localStorage.setItem("mrw-motion", on ? "off" : "on");
+      sessionStorage.removeItem("mrw-intro");
+      location.reload();
+    } catch (e) {
+      /* storage blocked: apply for this visit only */
+      var R = document.documentElement;
+      R.classList.toggle("force-motion", !on); R.classList.toggle("no-motion", on);
+      on = !on; b.setAttribute("aria-pressed", String(on));
+      if (window.gsap && window.gsap.matchMediaRefresh) window.gsap.matchMediaRefresh();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
