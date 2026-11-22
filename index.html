@@ -1,10 +1,23 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Maako Ravelle WOUROUGOU · Dossier</title>
-<meta name="description" content="Maako Ravelle WOUROUGOU, AI engineer and PhD candidate in AI for cybersecurity. Case file.">
+<title>Maako Ravelle WOUROUGOU · Ingénieur IA</title>
+<meta name="description" content="Ingénieur IA burkinabè basé à Fès, doctorant en IA pour la cybersécurité. Parole et traduction pour les langues peu dotées, agents IA, détection d’intrusion.">
+<link rel="canonical" href="https://ravel226.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ravel226.github.io/">
+<meta property="og:site_name" content="Maako Ravelle WOUROUGOU">
+<meta property="og:title" content="Maako Ravelle WOUROUGOU · Ingénieur IA">
+<meta property="og:description" content="Ingénieur IA burkinabè basé à Fès, doctorant en IA pour la cybersécurité. Parole et traduction pour les langues peu dotées, agents IA, détection d’intrusion.">
+<meta property="og:image" content="https://ravel226.github.io/img/og-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Maako Ravelle WOUROUGOU, ingénieur IA et doctorant en IA pour la cybersécurité, Fès">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="author" content="Maako Ravelle WOUROUGOU">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
@@ -45,7 +58,7 @@
 .motion-tg:focus-visible { outline: 2px solid var(--mt-acc, currentColor); outline-offset: 2px; }
 @media (max-width: 560px) { .motion-tg .mt-l { display: none; } }
 * { box-sizing:border-box; }
-html { scroll-padding-top:70px; }
+html { scroll-padding-top:70px; overflow-x:clip; }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior:smooth; } }
 html.force-motion { scroll-behavior:smooth; } html.no-motion { scroll-behavior:auto; }
 body { margin:0; background:radial-gradient(120% 80% at 50% 0%, var(--desk-2), var(--desk)); background-color:var(--desk); color:var(--ink); font:400 1.02rem/1.6 var(--f-t); overflow-x:clip; }
@@ -526,6 +539,11 @@ document.querySelectorAll("[data-setlang]").forEach(function (b) {
         .to(cov, { autoAlpha: 0, duration: .25 }, ">-.25");
     })();
   });
+  /* The tab title follows the language. */
+  var titles = { en: "Maako Ravelle WOUROUGOU · AI engineer", fr: "Maako Ravelle WOUROUGOU · Ingénieur IA" };
+  var setTitle = function () { document.title = titles[root.getAttribute("data-lang")] || titles.fr; };
+  setTitle(); new MutationObserver(setTitle).observe(root, { attributes: true, attributeFilter: ["data-lang"] });
+
   /* The latest public activity on GitHub, live. Hidden when the API cannot be reached (offline, rate limit, a sandboxed preview). */
   (function () {
     var box = document.getElementById("live"); if (!box || !window.fetch) return;
