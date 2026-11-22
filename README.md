@@ -2,7 +2,7 @@
 
 Ingénieur IA burkinabè basé à Fès, doctorant en IA pour la cybersécurité à l'UEMF.
 
-Site en ligne : https://ravel226.github.io/Portfolio/
+Site en ligne : https://ravel226.github.io/
 
 Un dossier déclassifié, bilingue (français et anglais), sans framework ni étape de construction : tampons, barres de caviardage, pièces à conviction et états de service tapés à la machine (Courier Prime, Big Shoulders Stencil). Un index à onglets suit la lecture sur la gauche (bande d'onglets sur téléphone). Le pied de page porte une signature, un avis de recherche de stage et la dernière activité publique sur GitHub, chargée en direct. Quelques œufs de Pâques sont cachés ; le pied de page donne des indices.
 
@@ -11,7 +11,7 @@ Un dossier déclassifié, bilingue (français et anglais), sans framework ni ét
 - `index.html` : le site.
 - `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png` : l'icône, une chemise aux lignes caviardées frappée d'un tampon rouge.
 - `img/` : portrait, captures de Nylah, de l'extension Lecteur vocal et du correcteur de QCM, en WebP.
-- `lecteur-vocal/confidentialite.html` : politique de confidentialité de l'extension Lecteur vocal, en français et en anglais. Adresse publique : https://ravel226.github.io/Portfolio/lecteur-vocal/confidentialite.html
+- `lecteur-vocal/confidentialite.html` : politique de confidentialité de l'extension Lecteur vocal, en français et en anglais. Adresse publique : https://ravel226.github.io/lecteur-vocal/confidentialite.html
 
 ## Animations
 
