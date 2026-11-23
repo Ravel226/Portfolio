@@ -171,6 +171,11 @@ h1,h2,h3 { margin:0; }
 .pts li::before { content:"-"; position:absolute; left:4px; font-weight:700; }
 .rx { position:relative; }
 .rx::after { content:""; position:absolute; inset:-.06em -.12em; background:#111; transform-origin:100% 50%; transform:scaleX(var(--r, 0)); pointer-events:none; }
+/* Exhibit points: one bar per line (each line fragment gets its own background), in the ink colour so the text
+   disappears under it; --r goes from 1 (covered) to 0 and every bar lifts from left to right. */
+.pts .rx { padding:.06em .12em; margin:0 -.12em; -webkit-box-decoration-break:clone; box-decoration-break:clone;
+  background:linear-gradient(var(--ink), var(--ink)) no-repeat 100% 0 / calc(var(--r, 0) * 100%) 100%; }
+.pts .rx::after { content:none; }
 .rx-click { cursor:pointer; outline-offset:3px; }
 .redacted .rx-click { --r:1; }
 .nb { margin:14px 0 0; font-style:italic; color:var(--faded); font-size:.92rem; }
