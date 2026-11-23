@@ -12,6 +12,7 @@ Un dossier déclassifié, bilingue (français et anglais), sans framework ni ét
 - `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png` : l'icône, une chemise aux lignes caviardées frappée d'un tampon rouge.
 - `img/` : portrait, captures de Nylah, de l'extension Lecteur vocal et du correcteur de QCM, en WebP.
 - `img/og-card.jpg` : la carte d'aperçu (1200 × 630) affichée quand le lien est partagé.
+- `robots.txt`, `sitemap.xml` : pour les moteurs de recherche. La page porte aussi des données structurées schema.org (type Person) qui relient le site aux profils LinkedIn, GitHub et freelancer.ma.
 - `lecteur-vocal/confidentialite.html` : politique de confidentialité de l'extension Lecteur vocal, en français et en anglais. Adresse publique : https://ravel226.github.io/lecteur-vocal/confidentialite.html
 
 ## Animations
