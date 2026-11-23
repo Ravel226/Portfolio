@@ -1,0 +1,48 @@
+# Maako Ravelle WOUROUGOU
+
+> AI engineer from Burkina Faso, based in Fès, Morocco. Full-time PhD candidate in AI for cybersecurity at the Euro-Mediterranean University of Fès (UEMF), defense expected in December 2027. He builds speech and translation systems for languages with little data, AI agents, and intrusion detection models.
+
+This file summarizes https://ravel226.github.io/, a portfolio in French and English. The full name used on publications is Maako Ravelle Cédric Roland Wourougou.
+
+- Looking for: a paid six-month doctoral internship in 2027, in AI for cybersecurity or speech.
+- Currently: available part-time, remote.
+- Contact: ravellewourougou@gmail.com
+- Languages: French, English, Spanish.
+
+## Pages
+
+- [Portfolio](https://ravel226.github.io/): projects, research, field notes, service record and contact
+- [Lecteur vocal privacy policy](https://ravel226.github.io/lecteur-vocal/confidentialite.html): privacy policy of the Lecteur vocal browser extension, in French and English
+
+## Research
+
+- [Data augmentation for intrusion detection](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7434328): under review at Array (Elsevier) since September 2026. A benchmark of 6 augmentation methods, from SMOTE to diffusion models, with 6 classifiers on 5 intrusion detection datasets, 10 random seeds and paired statistical tests.
+- Transformer and attention-based models for network intrusion detection, a systematic literature review: submitted in October 2026 to the Journal of Internet Services and Applications (JISA), co-written with Taha Ait Tchakoucht. 71 studies from 2020 to 2025, kept from 333 records in six databases by two independent reviewers (PRISMA 2020).
+- Does religious training data leak into translation?: in preparation, target journal ACM TALLIP. A controlled study on French to Mooré translation with NLLB-200.
+
+## Projects
+
+- Nylah (agent system, 2026, Python, private repository): a personal AI assistant that splits a hard goal into a task graph, runs workers in parallel waves, checks its own answer, and reports when something failed.
+- Lecteur vocal (browser extension, 2026, JavaScript): a Chrome and Edge extension that reads web articles, PDFs and selected text aloud with neural voices that run offline, built for reading research papers in French and English.
+- Fongbé speech and translation API (ByteInnovIT, 2024 to 2025): translation, speech recognition and speech synthesis for Fongbé, a language of Benin with very little digital text, served as one API.
+- Strategic watch for agriculture (Les Domaines Agricoles, Casablanca, 2024): collects market, competitor and technology news every day, then classifies and summarizes it with GPT-4 into watch reports.
+- CONSISTIA (document AI, 2025, Python): checks marketing documents against a brand charter with a local LLaMA 3.1 model.
+- [PhantomProbe](https://github.com/Ravel226/PhantomProbe): passive-first reconnaissance for penetration testers, open source (MIT), published on PyPI.
+- OpenStar (in progress, FastAPI, three.js): a self-hosted OSINT dashboard, with doxxing features deliberately left out.
+- Animated invitations for SOFATO (client work, 2025): digital invitations for Société Faso Tomate and a Guinness World Record attempt.
+- [Bubble-sheet grader](https://github.com/Ravel226/Bubble_Sheet_Corrector): grades a multiple-choice answer sheet from a phone photo with OpenCV.
+- [Drowsiness detection](https://github.com/Ravel226/Drowsiness_Detection): flags driver drowsiness from a webcam in real time with a YOLOv5 model trained on a self-collected dataset.
+
+## Experience and education
+
+- PhD candidate, AI for cybersecurity, UEMF, Fès: 12/2024 to 12/2027 (expected).
+- Teaching assistant, lab sessions in algorithms and C, UEMF, Fès: 09/2025 to 12/2025.
+- AI engineer, NLP and multimodal systems, ByteInnovIT, Benin (remote): 11/2024 to 06/2025.
+- AI intern, strategic watch, Les Domaines Agricoles, Casablanca: 02/2024 to 07/2024.
+- State Engineer degree in Artificial Intelligence, UEMF, Fès: 2024.
+
+## Profiles
+
+- [GitHub](https://github.com/Ravel226)
+- [LinkedIn](https://linkedin.com/in/maako-wourougou)
+- [freelancer.ma](https://www.freelancer.ma/freelancers/developpement-informatique-oVQBev)
